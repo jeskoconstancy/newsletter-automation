@@ -1,0 +1,13 @@
+{
+  "ts": "2026-11-26T09:11:34.029Z",
+  "mandant": "seltmann-weiden",
+  "campaign_id": "weihnachten-2026-11-26-1007",
+  "version": 1,
+  "decision": "Überarbeiten",
+  "comment": "Bitte die Bilder austauschen. Dazu die Überschrift \"Sieben Kollektionen für Ihre Festtafel\" anpassen",
+  "preview_url": "https://n8n.constancy.biz/webhook/newsletter-vorschau?mandant=seltmann-weiden&id=weihnachten-2026-11-26-1007-v1",
+  "html_file": "https://github.com/jeskoconstancy/newsletter-automation/blob/main/output/seltmann-weiden/weihnachten-2026-11-26-1007-v1.html",
+  "subject": "Weihnachtsporzellan: 7 festliche Kollektionen",
+  "errors": 0,
+  "warnings": 7
+}
