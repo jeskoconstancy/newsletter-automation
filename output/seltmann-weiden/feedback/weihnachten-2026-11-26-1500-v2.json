@@ -1,0 +1,13 @@
+{
+  "ts": "2026-11-26T14:04:02.188Z",
+  "mandant": "seltmann-weiden",
+  "campaign_id": "weihnachten-2026-11-26-1500",
+  "version": 2,
+  "decision": "Überarbeiten",
+  "comment": "Bitte tausche das Bild im EDITORIAL_CARD_01 aus",
+  "preview_url": "https://n8n.constancy.biz/webhook/newsletter-vorschau?mandant=seltmann-weiden&id=weihnachten-2026-11-26-1500-v2",
+  "html_file": "https://github.com/jeskoconstancy/newsletter-automation/blob/main/output/seltmann-weiden/weihnachten-2026-11-26-1500-v2.html",
+  "subject": "Festliche Tage beginnen mit Seltmann",
+  "errors": 0,
+  "warnings": 7
+}
