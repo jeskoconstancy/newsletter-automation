@@ -49,14 +49,14 @@
   },
   "tokens": {
     "color": {
-      "primary": "#004799",
+      "primary": "#14255E",
       "page_background": "#f2f2f6",
       "surface": "#ffffff",
       "text": "#000000",
       "text_inverse": "#ffffff",
-      "heading_accent": "#004799",
-      "headline_highlight": "#004799",
-      "divider": "#004799",
+      "heading_accent": "#14255E",
+      "headline_highlight": "#14255E",
+      "divider": "#14255E",
       "footer_rule": "#5a86c4"
     },
     "font": {
