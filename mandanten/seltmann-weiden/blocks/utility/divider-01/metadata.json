@@ -1,0 +1,87 @@
+{
+  "id": "DIVIDER_01",
+  "brand": "seltmann-weiden",
+  "name": "Trennlinie",
+  "version": "1.0.0",
+  "category": "utility",
+  "status": "stable",
+  "purpose": "Trennt inhaltliche Abschnitte.",
+  "description": "2px Linie in Primärfarbe über die Textbreite (700px) mit großzügigem Abstand (50/60/80px oben und unten). In 9/9 Referenzen zwei- bis dreimal pro Newsletter.",
+  "use_cases": [
+    "section_separator"
+  ],
+  "campaign_types": [
+    "collection_spotlight",
+    "sale",
+    "seasonal_campaign",
+    "product_launch",
+    "new_arrivals",
+    "gift_guide",
+    "voucher",
+    "black_week",
+    "brand_story",
+    "product_recommendations"
+  ],
+  "position": {
+    "slot": "body",
+    "unique": false,
+    "max_per_newsletter": 4
+  },
+  "fields": {
+    "spacing": {
+      "type": "enum",
+      "required": false,
+      "description": "s = 50px, m = 60px (nach Intro), l = 80px.",
+      "source": "static_default",
+      "values": [
+        "s",
+        "m",
+        "l"
+      ],
+      "default": "m"
+    }
+  },
+  "image_requirements": [],
+  "layout": {
+    "desktop_columns": 1,
+    "mobile_columns": 1,
+    "full_width": false,
+    "uses_background_image": false,
+    "approx_height_px": {
+      "s": 102,
+      "m": 122,
+      "l": 162
+    },
+    "space_weight": "s"
+  },
+  "constraints": [
+    "not_first_or_last_content_block",
+    "no_two_dividers_in_a_row"
+  ],
+  "exclusion_criteria": [],
+  "compatibility": {
+    "recommended_after": [
+      "INTRO_TEXT_01",
+      "IMAGE_GRID_01",
+      "EDITORIAL_CARD_01",
+      "PRODUCT_GRID_01"
+    ],
+    "recommended_before": [
+      "EDITORIAL_CARD_01",
+      "TEXT_BLOCK_01",
+      "IMAGE_GRID_01",
+      "FOOTER_01"
+    ],
+    "avoid_adjacent": [
+      "DIVIDER_01",
+      "HEADER_01",
+      "HERO_01"
+    ],
+    "hard_dependencies": []
+  },
+  "ai_hints": {
+    "when_to_use": "Zwischen Intro-Abschnitt und Editorial-Karte sowie vor dem Footer (Referenzstandard).",
+    "when_not_to_use": "Zwischen Hero und Intro.",
+    "content_guidelines": "Keine Inhalte."
+  }
+}

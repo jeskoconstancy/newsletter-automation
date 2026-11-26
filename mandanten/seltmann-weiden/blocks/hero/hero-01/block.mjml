@@ -1,0 +1,11 @@
+{{!-- HERO_01 · Hintergrundbild mit Headline oben links.
+     Varianten (Parameter): width full|contained · headline_style highlight|plain · headline_size m|l|xl · height compact|medium|tall
+     Outlook: MJML erzeugt automatisch einen VML-Fallback (v:rect) für background-url; zusätzlich greift background-color. --}}
+<mj-section{{#if (eq d.width "full")}} full-width="full-width"{{/if}} background-url="{{asset d.image.url}}" background-size="cover" background-position="{{d.image_position}}" background-repeat="no-repeat" background-color="{{d.fallback_color}}" padding="0 {{t.layout.section_padding_x}}px" css-class="nl-hero">
+  <mj-column>
+    <mj-text css-class="nl-hero-text{{#if (eq d.height "tall")}} nl-hero-tall{{/if}}" padding="10px 10px {{heroPadding d.height}}px" color="{{t.color.text_inverse}}">
+      {{#if d.link_url}}<a href="{{link d.link_url}}" style="color:{{t.color.text_inverse}};text-decoration:none;">{{/if}}<h1 class="nl-hero-h1-{{d.headline_size}}" style="margin:0;font-family:{{t.font.base_family}};font-size:{{lookup (lookup t.type (concat "hero_" d.headline_size)) "size"}};line-height:{{lookup (lookup t.type (concat "hero_" d.headline_size)) "line_height"}};font-weight:700;color:{{t.color.text_inverse}};{{#if (lookup (lookup t.type (concat "hero_" d.headline_size)) "transform")}}{{#unless d.preserve_case}}text-transform:uppercase;{{/unless}}{{/if}}">{{#if (eq d.headline_style "highlight")}}<span class="nl-hl nl-hero-h1-{{d.headline_size}}" style="background-color:{{t.color.headline_highlight}};color:{{t.color.text_inverse}};padding:0 2px;">{{nl2br d.headline}}</span>{{else}}{{nl2br d.headline}}{{/if}}</h1>{{#if d.link_url}}</a>{{/if}}
+      {{#if d.subheadline}}<p style="margin:12px 0 0;font-size:18px;line-height:26px;font-weight:700;color:{{t.color.text_inverse}};">{{#if (eq d.headline_style "highlight")}}<span class="nl-hl" style="background-color:{{t.color.headline_highlight}};padding:0 2px;">{{d.subheadline}}</span>{{else}}{{d.subheadline}}{{/if}}</p>{{/if}}
+    </mj-text>
+  </mj-column>
+</mj-section>

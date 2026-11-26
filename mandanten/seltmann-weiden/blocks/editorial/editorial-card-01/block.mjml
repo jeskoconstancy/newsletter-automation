@@ -1,0 +1,22 @@
+{{!-- EDITORIAL_CARD_01 · Stimmungsbild mit überlagerter weißer Textkarte (Signatur-Element des Shops, 9/9 Referenzen).
+     Aufbau: Abschnitt A = Hintergrundbild (VML-Fallback durch MJML) + oberer Kartenteil (Headline + Absatz 1);
+             Abschnitt B = unterer Kartenteil (weitere Absätze + Textlink) auf Seitenhintergrund.
+     Dadurch "ragt" die Karte unten aus dem Bild heraus – wie in den Referenzen. --}}
+<mj-section background-url="{{asset d.image.url}}" background-size="cover" background-position="{{d.image_position}}" background-repeat="no-repeat" background-color="{{d.fallback_color}}" padding="{{t.layout.card_image_overlap}}px {{t.layout.section_padding_x}}px 0" text-align="center" css-class="nl-card-media">
+  <mj-column width="{{t.layout.card_width_percent}}%" background-color="{{t.color.surface}}" padding="20px 20px {{#if d.paragraphs.[1]}}30px{{else}}10px{{/if}}">
+    <mj-text css-class="nl-card-heading" padding="10px 10px 32px">
+      <div style="font-size:{{t.type.card_heading.size}};line-height:{{t.type.card_heading.line_height}};font-weight:700;color:{{d.headline_color}};{{#if d.uppercase}}text-transform:uppercase;{{/if}}">{{#if d.headline_link}}<a href="{{link d.link_url}}" style="color:{{d.headline_color}};text-decoration:none;">{{d.headline}}</a>{{else}}{{d.headline}}{{/if}}</div>
+    </mj-text>
+    <mj-text padding="0 10px 10px">
+      <p style="margin:0;">{{rt d.paragraphs.[0]}}</p>
+    </mj-text>
+  </mj-column>
+</mj-section>
+<mj-section background-color="{{t.color.page_background}}" padding="0 {{t.layout.section_padding_x}}px {{spacing d.spacing_bottom}}px" text-align="center">
+  <mj-column width="{{t.layout.card_width_percent}}%" background-color="{{t.color.surface}}" padding="{{#if d.paragraphs.[1]}}44px{{else}}10px{{/if}} 20px 20px">
+    <mj-text padding="0 10px 10px">
+      {{#each d.paragraphs}}{{#unless @first}}<p style="margin:0 0 22px;">{{rt this}}</p>{{/unless}}{{/each}}
+      <p style="margin:{{#if d.paragraphs.[1]}}0{{else}}12px 0 0{{/if}};">{{> text-link label=d.link_label url=d.link_url}}</p>
+    </mj-text>
+  </mj-column>
+</mj-section>

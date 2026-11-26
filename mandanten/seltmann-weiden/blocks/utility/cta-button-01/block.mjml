@@ -1,0 +1,6 @@
+{{!-- CTA_BUTTON_01 · Eigenständiger Button (eckig, Primärfarbe, Pfeil ➞) --}}
+<mj-section background-color="{{t.color.page_background}}" padding="{{spacing d.spacing_top}}px {{t.layout.section_padding_x}}px {{spacing d.spacing_bottom}}px">
+  <mj-column padding="10px">
+    {{> button label=d.label url=d.url align=d.align}}
+  </mj-column>
+</mj-section>

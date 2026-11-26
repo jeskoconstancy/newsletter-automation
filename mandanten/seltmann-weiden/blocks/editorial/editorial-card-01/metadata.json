@@ -1,0 +1,261 @@
+{
+  "id": "EDITORIAL_CARD_01",
+  "brand": "seltmann-weiden",
+  "name": "Editorial – Bild mit überlagerter Textkarte",
+  "version": "1.0.0",
+  "category": "editorial",
+  "status": "stable",
+  "purpose": "Redaktionelle Vertiefung einer Kollektion: Stimmungsbild + Karte mit Headline, Text und Link.",
+  "description": "Signatur-Element des Shops: großes Stimmungsbild (740px), über dessen unteren Rand eine weiße Textkarte (76 % Breite, zentriert) ragt. Headline 25px fett in Primärfarbe (Versalien), 1–3 Absätze, Textlink 'Jetzt entdecken ➞'. In 9/9 Referenzen.",
+  "use_cases": [
+    "collection_deep_dive",
+    "storytelling",
+    "quality_arguments",
+    "second_collection"
+  ],
+  "campaign_types": [
+    "collection_spotlight",
+    "sale",
+    "seasonal_campaign",
+    "product_launch",
+    "new_arrivals",
+    "gift_guide",
+    "voucher",
+    "black_week",
+    "brand_story",
+    "product_recommendations"
+  ],
+  "position": {
+    "slot": "body",
+    "unique": false,
+    "max_per_newsletter": 3
+  },
+  "fields": {
+    "image": {
+      "type": "image",
+      "required": true,
+      "description": "Stimmungsbild hinter der Karte.",
+      "source": "asset_pipeline",
+      "validation": {
+        "image_requirement": "card_image"
+      },
+      "fields": {
+        "url": {
+          "type": "url",
+          "required": true,
+          "description": "Absolute HTTPS-URL des Bildes (im Vorschaumodus auch relativ).",
+          "source": "asset_pipeline",
+          "validation": {
+            "https_only": true
+          }
+        },
+        "alt": {
+          "type": "string",
+          "required": true,
+          "description": "Alternativtext, beschreibt den sichtbaren Bildinhalt (nicht den Dateinamen).",
+          "source": "ai_agent",
+          "validation": {
+            "min_length": 3,
+            "max_length": 140
+          }
+        },
+        "width": {
+          "type": "integer",
+          "required": false,
+          "description": "Pixelbreite der Originaldatei – nötig für Verhältnis-/Auflösungsprüfung.",
+          "source": "asset_pipeline",
+          "validation": {
+            "min": 1
+          }
+        },
+        "height": {
+          "type": "integer",
+          "required": false,
+          "description": "Pixelhöhe der Originaldatei.",
+          "source": "asset_pipeline",
+          "validation": {
+            "min": 1
+          }
+        },
+        "asset_id": {
+          "type": "string",
+          "required": false,
+          "description": "Referenz auf das Asset im Bildreferenz-Format (asset-reference-schema.json).",
+          "source": "asset_pipeline"
+        },
+        "rights_status": {
+          "type": "enum",
+          "required": false,
+          "description": "Nutzungsfreigabe des Bildes.",
+          "source": "asset_pipeline",
+          "values": [
+            "approved",
+            "pending",
+            "unknown",
+            "rejected"
+          ],
+          "default": "unknown"
+        }
+      }
+    },
+    "image_position": {
+      "type": "string",
+      "required": false,
+      "description": "CSS background-position; Motiv sollte im oberen Bilddrittel liegen.",
+      "source": "asset_pipeline",
+      "default": "center top"
+    },
+    "headline": {
+      "type": "string",
+      "required": true,
+      "description": "Kartenüberschrift (wird in Versalien dargestellt).",
+      "source": "ai_agent",
+      "validation": {
+        "min_length": 5,
+        "max_length": 60,
+        "recommended_max_length": 50
+      },
+      "example": "Romantik trifft auf Tradition – Sonate Nostalgie"
+    },
+    "headline_color": {
+      "type": "color",
+      "required": false,
+      "description": "Farbe der Headline.",
+      "source": "design_tokens",
+      "default_from": "t.color.heading_accent"
+    },
+    "uppercase": {
+      "type": "boolean",
+      "required": false,
+      "description": "Headline in Versalien (Referenzstandard 7/9).",
+      "source": "static_default",
+      "default": true
+    },
+    "headline_link": {
+      "type": "boolean",
+      "required": false,
+      "description": "Headline mit link_url verlinken.",
+      "source": "static_default",
+      "default": false
+    },
+    "paragraphs": {
+      "type": "paragraphs",
+      "required": true,
+      "description": "Absatz 1 steht im Bildbereich, weitere Absätze unterhalb. Erlaubte Inline-Auszeichnung: <strong>, <em>, <br>. Kein weiteres HTML.",
+      "source": "ai_agent",
+      "validation": {
+        "min_items": 1,
+        "max_items": 3,
+        "item_max_length": 460,
+        "total_max_length": 950
+      },
+      "format": "Array aus Absätzen (Strings)"
+    },
+    "link_label": {
+      "type": "string",
+      "required": false,
+      "description": "Textlink (➞ automatisch).",
+      "source": "ai_agent",
+      "default": "Jetzt entdecken",
+      "validation": {
+        "max_length": 45
+      }
+    },
+    "link_url": {
+      "type": "url",
+      "required": true,
+      "description": "Ziel des Textlinks.",
+      "source": "campaign_brief",
+      "validation": {
+        "https_only": true
+      }
+    },
+    "spacing_bottom": {
+      "type": "enum",
+      "required": false,
+      "description": "Abstand unter der Karte (s=20px, m=30px, l=50px, none=0).",
+      "source": "static_default",
+      "values": [
+        "none",
+        "s",
+        "m",
+        "l"
+      ],
+      "default": "s"
+    },
+    "fallback_color": {
+      "type": "color",
+      "required": false,
+      "description": "Hintergrund, falls Bild nicht lädt.",
+      "source": "design_tokens",
+      "default_from": "t.color.primary"
+    }
+  },
+  "image_requirements": [
+    {
+      "key": "card_image",
+      "field": "image",
+      "image_type": "editorial",
+      "aspect_ratio": "3:2",
+      "aspect_ratio_alternatives": [
+        "5:4",
+        "4:3",
+        "16:10"
+      ],
+      "display_width": 740,
+      "min_width": 1000,
+      "min_height": 660,
+      "formats": [
+        "jpg",
+        "jpeg",
+        "png",
+        "gif"
+      ],
+      "alt_required": true,
+      "crop": "cover; sichtbar sind die oberen ca. 300px + Höhe des oberen Kartenteils",
+      "focus": "Motiv im oberen Drittel – der untere Teil wird von der Karte verdeckt",
+      "usage": "Gedeckter Tisch / Lifestyle-Aufnahme der Kollektion",
+      "rendering": "background"
+    }
+  ],
+  "layout": {
+    "desktop_columns": 1,
+    "mobile_columns": 1,
+    "full_width": false,
+    "uses_background_image": true,
+    "approx_height_px": {
+      "desktop": 560,
+      "mobile": 640
+    },
+    "space_weight": "xl"
+  },
+  "constraints": [
+    "requires_image",
+    "requires_headline",
+    "requires_link_url",
+    "paragraphs_1_to_3"
+  ],
+  "exclusion_criteria": [
+    "Kein Stimmungsbild verfügbar → TEXT_BLOCK_01 + IMAGE_GRID_01 verwenden.",
+    "Reine Produktfreisteller sind ungeeignet."
+  ],
+  "compatibility": {
+    "recommended_after": [
+      "DIVIDER_01"
+    ],
+    "recommended_before": [
+      "IMAGE_GRID_01",
+      "DIVIDER_01"
+    ],
+    "avoid_adjacent": [
+      "HERO_01",
+      "EDITORIAL_CARD_01"
+    ],
+    "hard_dependencies": []
+  },
+  "ai_hints": {
+    "when_to_use": "Für die zweite Hälfte des Newsletters: Qualitätsargumente, Anlässe, zweite Kollektion.",
+    "when_not_to_use": "Nicht direkt nach dem Hero (zwei Hintergrundbilder hintereinander).",
+    "content_guidelines": "Headline-Muster: '<Nutzen> – <Kollektion>' oder Claim ('Farbe trifft Struktur'). Absatz 1: Kernaussage (≤ 300 Zeichen), Absatz 2: Anlässe/Kombinierbarkeit."
+  }
+}

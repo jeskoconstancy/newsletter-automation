@@ -1,0 +1,21 @@
+{{!-- TH_TEXT_01 · Headline (rot oder dunkelgrau, fett) + Fließtext + optional Gutscheincode, Aktionshinweis (*) und Button.
+     Standard direkt unter dem Hero (10/10), auch als zweiter Textblock nach einem Banner (schulstart, muttertag). --}}
+<mj-section padding="{{spacing d.spacing_top}}px {{t.layout.section_padding_x}}px {{spacing d.spacing_bottom}}px" css-class="th-text">
+  <mj-column padding="{{t.layout.column_padding}}px">
+    {{#if d.headline}}
+    <mj-text align="{{#if (eq d.align "justify")}}left{{else}}{{d.align}}{{/if}}" css-class="th-headline" padding="0 0 {{#if (or d.paragraphs d.note d.coupon_code)}}18px{{else}}0{{/if}}">
+      <h2 style="margin:0;font-size:{{t.type.headline.size}};line-height:{{t.type.headline.line_height}};font-weight:{{#if (eq d.headline_weight "regular")}}400{{else}}{{t.type.headline.weight}}{{/if}};color:{{#if (eq d.headline_color "dark")}}{{t.color.heading_alt}}{{else}}{{t.color.heading}}{{/if}};">{{nl2br d.headline}}</h2>
+    </mj-text>
+    {{/if}}
+    {{#if (or d.paragraphs d.note d.coupon_code)}}
+    <mj-text align="{{d.align}}">
+      {{#each d.paragraphs}}<p style="margin:0{{#unless @last}} 0 {{#if (and @first ../d.coupon_code (eq ../d.coupon_position "after_first"))}}6px{{else}}21px{{/if}}{{/unless}};text-align:{{../d.align}};">{{rt this}}</p>{{#if (and @first ../d.coupon_code (eq ../d.coupon_position "after_first"))}}{{> th-coupon code=../d.coupon_code t=../t align=../d.align margin="0 0 6px"}}{{/if}}{{/each}}
+      {{#if (and d.coupon_code (or (eq d.coupon_position "after_all") (not d.paragraphs)))}}{{> th-coupon code=d.coupon_code t=t align=d.align margin=(pick (not d.paragraphs) "true=0" "12px 0 0")}}{{/if}}
+      {{#if d.note}}<p style="margin:{{#if (or d.paragraphs d.coupon_code)}}21px{{else}}0{{/if}} 0 0;font-size:{{t.type.note.size}};line-height:{{t.type.note.line_height}};text-align:{{#if (eq d.align "justify")}}left{{else}}{{d.align}}{{/if}};">{{d.note}}</p>{{/if}}
+    </mj-text>
+    {{/if}}
+    {{#if (and d.cta_label d.cta_url)}}
+    {{> button label=d.cta_label url=d.cta_url variant=d.cta_variant preserve_case=d.cta_preserve_case align=(fallback d.cta_align "center") padding="20px 0 0"}}
+    {{/if}}
+  </mj-column>
+</mj-section>

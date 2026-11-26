@@ -1,0 +1,263 @@
+{
+  "id": "TH_FOOTER_01",
+  "brand": "teddy-hermann",
+  "name": "Footer – Impressum beige, Abo-Hinweis",
+  "version": "1.0.0",
+  "category": "footer",
+  "status": "stable",
+  "purpose": "Pflichtangaben (Impressum), Kontakt und Abmeldemöglichkeit.",
+  "description": "Optional Preishinweis '* inkl. MwSt.' (zentriert, 12px) · beige Fläche (#faf5f2): rotes Siegel links (80px), Spalte 'Teddy Hermann Shop' + Betreiberangaben, Spalte Register/Geschäftsführer/Kontakt/Website/©, alles hellgrau 12px · weiße Fläche mit Abo-Hinweis und rotem Abmeldelink HIER. In 10/10 Referenzen identisch.",
+  "use_cases": [
+    "legal",
+    "unsubscribe",
+    "contact"
+  ],
+  "campaign_types": [
+    "seasonal_campaign",
+    "sale",
+    "voucher",
+    "gift_guide",
+    "new_arrivals",
+    "product_launch",
+    "collection_spotlight",
+    "contest",
+    "free_gift",
+    "free_shipping",
+    "product_recommendations",
+    "brand_story"
+  ],
+  "position": {
+    "slot": "last",
+    "unique": true,
+    "max_per_newsletter": 1
+  },
+  "fields": {
+    "footer_logo": {
+      "type": "object",
+      "required": true,
+      "description": "Siegel-Logo.",
+      "source": "shop_profile",
+      "default_from": "shop.footer_logo",
+      "fields": {
+        "url": {
+          "type": "url",
+          "required": true,
+          "description": "PNG transparent.",
+          "source": "shop_profile",
+          "validation": {
+            "https_only": true
+          }
+        },
+        "alt": {
+          "type": "string",
+          "required": true,
+          "description": "Alt-Text.",
+          "source": "shop_profile"
+        },
+        "width": {
+          "type": "integer",
+          "required": true,
+          "description": "Anzeigebreite.",
+          "source": "shop_profile",
+          "default": 80,
+          "validation": {
+            "min": 40,
+            "max": 120
+          }
+        },
+        "preview_url": {
+          "type": "string",
+          "required": false,
+          "description": "Lokales Bild für Vorschau.",
+          "source": "shop_profile"
+        }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "required": true,
+      "description": "Telefon und E-Mail.",
+      "source": "shop_profile",
+      "default_from": "shop.contact",
+      "fields": {
+        "phone": {
+          "type": "string",
+          "required": true,
+          "description": "Telefon.",
+          "source": "shop_profile"
+        },
+        "email": {
+          "type": "string",
+          "required": true,
+          "description": "E-Mail.",
+          "source": "shop_profile",
+          "validation": {
+            "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+          }
+        }
+      }
+    },
+    "shop_url": {
+      "type": "url",
+      "required": true,
+      "description": "Shop-URL.",
+      "source": "shop_profile",
+      "validation": {
+        "https_only": true
+      },
+      "default_from": "shop.urls.shop"
+    },
+    "website_display": {
+      "type": "string",
+      "required": true,
+      "description": "Angezeigte Web-Adresse.",
+      "source": "shop_profile",
+      "default_from": "shop.urls.website_display"
+    },
+    "legal": {
+      "type": "object",
+      "required": true,
+      "description": "Impressum und Rechtstexte.",
+      "source": "shop_profile",
+      "default_from": "shop.legal",
+      "fields": {
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Überschrift ('Teddy Hermann Shop').",
+          "source": "shop_profile"
+        },
+        "operator_lines": {
+          "type": "paragraphs",
+          "required": true,
+          "description": "Betreiber, Anschrift, USt-IdNr., Steuernummer, Amtsgericht – je Zeile ein Eintrag.",
+          "source": "shop_profile",
+          "validation": {
+            "min_items": 3,
+            "max_items": 8,
+            "item_max_length": 80
+          }
+        },
+        "operator": {
+          "type": "string",
+          "required": true,
+          "description": "Betreiber einzeilig (für Prüfung MISSING_FOOTER_LEGAL).",
+          "source": "shop_profile",
+          "validation": {
+            "min_length": 10
+          }
+        },
+        "register": {
+          "type": "string",
+          "required": false,
+          "description": "Handelsregister.",
+          "source": "shop_profile"
+        },
+        "managing_directors": {
+          "type": "string",
+          "required": false,
+          "description": "Geschäftsführer.",
+          "source": "shop_profile"
+        },
+        "rights": {
+          "type": "string",
+          "required": false,
+          "description": "Rechtevermerk vor der Jahreszahl.",
+          "source": "shop_profile"
+        },
+        "subscription_reason": {
+          "type": "string",
+          "required": true,
+          "description": "Grund des Erhalts.",
+          "source": "shop_profile"
+        },
+        "unsubscribe_sentence": {
+          "type": "string",
+          "required": true,
+          "description": "Satz mit {{link}}-Platzhalter für den Abmeldelink.",
+          "source": "shop_profile",
+          "validation": {
+            "pattern": "\\{\\{link\\}\\}"
+          }
+        },
+        "unsubscribe_link_label": {
+          "type": "string",
+          "required": true,
+          "description": "Linktext ('HIER').",
+          "source": "shop_profile"
+        },
+        "price_note": {
+          "type": "string",
+          "required": false,
+          "description": "Preishinweis.",
+          "source": "shop_profile"
+        }
+      }
+    },
+    "unsubscribe_url": {
+      "type": "url_or_merge_tag",
+      "required": true,
+      "description": "Abmeldelink: Rapidmail-Platzhalter {%link_unsubscribe} (aus shop.esp.unsubscribe_url). PFLICHT.",
+      "source": "esp",
+      "default_from": "shop.esp.unsubscribe_url"
+    },
+    "show_price_note": {
+      "type": "boolean",
+      "required": false,
+      "description": "Preishinweis '* inkl. MwSt. …' über dem Impressum. Wird automatisch eingeschaltet, sobald ein Baustein Preise zeigt.",
+      "source": "static_default",
+      "default": false
+    }
+  },
+  "image_requirements": [
+    {
+      "key": "footer_logo",
+      "field": "footer_logo",
+      "image_type": "logo",
+      "aspect_ratio": null,
+      "display_width": 80,
+      "min_width": 140,
+      "formats": [
+        "png"
+      ],
+      "alt_required": true,
+      "usage": "Rotes Siegel, transparent",
+      "rendering": "img"
+    }
+  ],
+  "layout": {
+    "desktop_columns": 3,
+    "mobile_columns": 1,
+    "full_width": false,
+    "uses_background_image": false,
+    "approx_height_px": {
+      "desktop": 270,
+      "mobile": 470
+    },
+    "space_weight": "m"
+  },
+  "constraints": [
+    "must_be_last_block",
+    "requires_unsubscribe_link",
+    "requires_operator"
+  ],
+  "exclusion_criteria": [],
+  "compatibility": {
+    "recommended_after": [
+      "TH_IMAGE_TEXT_01",
+      "TH_PRODUCT_GRID_01",
+      "TH_TEXT_01",
+      "TH_IMAGE_01"
+    ],
+    "recommended_before": [],
+    "avoid_adjacent": [
+      "TH_DIVIDER_01"
+    ],
+    "hard_dependencies": []
+  },
+  "ai_hints": {
+    "when_to_use": "Immer als letzter Baustein.",
+    "when_not_to_use": "Nie weglassen.",
+    "content_guidelines": "Keine Daten nötig – alles aus dem Shop-Profil. show_price_note setzt der Renderer automatisch, wenn Preise vorkommen."
+  }
+}

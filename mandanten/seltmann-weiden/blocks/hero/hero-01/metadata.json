@@ -1,0 +1,285 @@
+{
+  "id": "HERO_01",
+  "brand": "seltmann-weiden",
+  "name": "Hero – Bild mit Headline-Überlagerung",
+  "version": "1.0.0",
+  "category": "hero",
+  "status": "stable",
+  "purpose": "Aufmacher: Kampagnenbotschaft groß auf einem Stimmungsbild.",
+  "description": "Hintergrundbild (cover) mit weißer, fetter Headline oben links. Varianten über Parameter: volle Fensterbreite oder 740px, Headline mit Primärfarben-Hinterlegung oder ohne, drei Schriftgrößen, drei Höhen. In 9/9 Referenzen vorhanden.",
+  "use_cases": [
+    "campaign_opener",
+    "headline_message",
+    "mood_setting"
+  ],
+  "campaign_types": [
+    "collection_spotlight",
+    "sale",
+    "seasonal_campaign",
+    "product_launch",
+    "new_arrivals",
+    "gift_guide",
+    "voucher",
+    "black_week",
+    "brand_story",
+    "product_recommendations"
+  ],
+  "position": {
+    "slot": "top",
+    "unique": true,
+    "max_per_newsletter": 1
+  },
+  "fields": {
+    "image": {
+      "type": "image",
+      "required": true,
+      "description": "Hintergrundbild des Hero.",
+      "source": "asset_pipeline",
+      "validation": {
+        "image_requirement": "hero_image"
+      },
+      "fields": {
+        "url": {
+          "type": "url",
+          "required": true,
+          "description": "Absolute HTTPS-URL des Bildes (im Vorschaumodus auch relativ).",
+          "source": "asset_pipeline",
+          "validation": {
+            "https_only": true
+          }
+        },
+        "alt": {
+          "type": "string",
+          "required": true,
+          "description": "Alternativtext, beschreibt den sichtbaren Bildinhalt (nicht den Dateinamen).",
+          "source": "ai_agent",
+          "validation": {
+            "min_length": 3,
+            "max_length": 140
+          }
+        },
+        "width": {
+          "type": "integer",
+          "required": false,
+          "description": "Pixelbreite der Originaldatei – nötig für Verhältnis-/Auflösungsprüfung.",
+          "source": "asset_pipeline",
+          "validation": {
+            "min": 1
+          }
+        },
+        "height": {
+          "type": "integer",
+          "required": false,
+          "description": "Pixelhöhe der Originaldatei.",
+          "source": "asset_pipeline",
+          "validation": {
+            "min": 1
+          }
+        },
+        "asset_id": {
+          "type": "string",
+          "required": false,
+          "description": "Referenz auf das Asset im Bildreferenz-Format (asset-reference-schema.json).",
+          "source": "asset_pipeline"
+        },
+        "rights_status": {
+          "type": "enum",
+          "required": false,
+          "description": "Nutzungsfreigabe des Bildes.",
+          "source": "asset_pipeline",
+          "values": [
+            "approved",
+            "pending",
+            "unknown",
+            "rejected"
+          ],
+          "default": "unknown"
+        }
+      }
+    },
+    "headline": {
+      "type": "string",
+      "required": true,
+      "description": "Hauptbotschaft. Kurz, aktivierend; bei headline_size m/xl automatisch in Versalien. Ein Zeilenumbruch (\\n) erzwingt eine neue Zeile (wie in den Referenzen beatcolorglaze/summersale).",
+      "source": "ai_agent",
+      "validation": {
+        "min_length": 5,
+        "max_length": 70,
+        "recommended_max_length": 55
+      },
+      "example": "Sonate Blue Lines – Maritime Eleganz zu Sonderpreisen"
+    },
+    "subheadline": {
+      "type": "string",
+      "required": false,
+      "description": "Optionale zweite Zeile (18px). In Referenzen nicht verwendet – sparsam einsetzen.",
+      "source": "ai_agent",
+      "validation": {
+        "max_length": 80
+      }
+    },
+    "headline_style": {
+      "type": "enum",
+      "required": false,
+      "description": "highlight = weiße Schrift auf Primärfarben-Hinterlegung (bei unruhigen/hellen Bildern, 4/9); plain = weiße Schrift direkt auf Bild (nur bei dunklen/ruhigen Bildbereichen oben links).",
+      "source": "ai_agent",
+      "values": [
+        "highlight",
+        "plain"
+      ],
+      "default": "highlight"
+    },
+    "headline_size": {
+      "type": "enum",
+      "required": false,
+      "description": "m = 25px Versalien, l = 36px, xl = 46px Versalien (für Aktions-/Saisonkampagnen).",
+      "source": "ai_agent",
+      "values": [
+        "m",
+        "l",
+        "xl"
+      ],
+      "default": "l"
+    },
+    "preserve_case": {
+      "type": "boolean",
+      "required": false,
+      "description": "true = keine automatische Versalien-Umwandlung bei m/xl.",
+      "source": "static_default",
+      "default": false
+    },
+    "width": {
+      "type": "enum",
+      "required": false,
+      "description": "full = Bild über volle Fensterbreite (7/9), contained = auf 740px begrenzt (2/9, für hohe/quadratische Motive).",
+      "source": "static_default",
+      "values": [
+        "full",
+        "contained"
+      ],
+      "default": "full"
+    },
+    "height": {
+      "type": "enum",
+      "required": false,
+      "description": "Mindesthöhe: compact ≈ 245px, medium ≈ 360px, tall ≈ 700px (nur contained).",
+      "source": "static_default",
+      "values": [
+        "compact",
+        "medium",
+        "tall"
+      ],
+      "default": "compact"
+    },
+    "image_position": {
+      "type": "string",
+      "required": false,
+      "description": "CSS background-position (Fokuspunkt des Motivs).",
+      "source": "asset_pipeline",
+      "default": "center center",
+      "validation": {
+        "pattern": "^(left|center|right|\\d{1,3}%) (top|center|bottom|\\d{1,3}%)$"
+      }
+    },
+    "link_url": {
+      "type": "url",
+      "required": false,
+      "description": "Optional: Headline verlinken (blackweek).",
+      "source": "campaign_brief",
+      "validation": {
+        "https_only": true
+      }
+    },
+    "fallback_color": {
+      "type": "color",
+      "required": false,
+      "description": "Hintergrundfarbe, falls Bilder blockiert sind. Muss mit weißer Schrift lesbar sein.",
+      "source": "design_tokens",
+      "default_from": "t.color.primary"
+    }
+  },
+  "image_requirements": [
+    {
+      "key": "hero_image",
+      "field": "image",
+      "image_type": "hero",
+      "aspect_ratio": null,
+      "aspect_ratio_alternatives": [
+        "full: ≥ 3:1 (z. B. 2000×600)",
+        "contained/compact: ≈ 3:1",
+        "contained/tall: ≈ 1:1 (1480×1400)"
+      ],
+      "display_width": 740,
+      "min_width": 1480,
+      "min_height": 500,
+      "formats": [
+        "jpg",
+        "jpeg",
+        "png",
+        "gif"
+      ],
+      "alt_required": true,
+      "crop": "background-size: cover – Ränder werden je nach Fensterbreite beschnitten",
+      "focus": "Motiv rechts/mittig, linkes oberes Drittel ruhig für die Headline",
+      "usage": "Stimmungsvolles Lifestyle-/Tischbild der Kollektion",
+      "rendering": "background"
+    }
+  ],
+  "layout": {
+    "desktop_columns": 1,
+    "mobile_columns": 1,
+    "full_width": "parameter:width",
+    "uses_background_image": true,
+    "approx_height_px": {
+      "compact": 245,
+      "medium": 360,
+      "tall": 700,
+      "mobile_compact": 170
+    },
+    "space_weight": "l"
+  },
+  "constraints": [
+    "requires_image",
+    "requires_headline",
+    "headline_max_70_chars",
+    "image_should_have_quiet_top_left_area",
+    "no_cta_button_inside_hero"
+  ],
+  "exclusion_criteria": [
+    "Kein geeignetes querformatiges Stimmungsbild vorhanden → Hero weglassen und mit INTRO_TEXT_01 beginnen oder IMAGE_GRID_01 (1 Spalte) verwenden.",
+    "Bild hat Text/Logos eingebrannt → nicht als Hero verwenden."
+  ],
+  "compatibility": {
+    "recommended_after": [
+      "HEADER_01"
+    ],
+    "recommended_before": [
+      "INTRO_TEXT_01"
+    ],
+    "avoid_adjacent": [
+      "DIVIDER_01",
+      "EDITORIAL_CARD_01"
+    ],
+    "hard_dependencies": []
+  },
+  "ai_hints": {
+    "when_to_use": "Standard-Aufmacher für jede Kampagne mit Stimmungsbild.",
+    "when_not_to_use": "Wenn nur Produktfreisteller (weißer Hintergrund) vorhanden sind.",
+    "content_guidelines": "Headline-Muster aus Referenzen: '<Kollektion> – <Nutzen/Angebot>' (z. B. 'ZOÉ FINE DIAMOND – Klassische Eleganz zu Sonderpreisen') oder Kampagnenclaim ('BLACK WEEK DEALS'). Sie-Ansprache. Keine Emojis.",
+    "variant_selection": {
+      "sale|black_week|voucher": {
+        "headline_size": "xl",
+        "headline_style": "plain"
+      },
+      "collection_spotlight|product_launch": {
+        "headline_size": "l",
+        "headline_style": "highlight"
+      },
+      "seasonal_campaign": {
+        "headline_size": "m",
+        "headline_style": "plain",
+        "height": "medium"
+      }
+    }
+  }
+}

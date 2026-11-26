@@ -1,0 +1,323 @@
+{
+  "id": "TH_PRODUCT_GRID_01",
+  "brand": "teddy-hermann",
+  "name": "Produktraster – 2/3/4 Produkte je Reihe",
+  "version": "1.0.0",
+  "category": "product",
+  "status": "stable",
+  "purpose": "Konkrete Produkte aus dem Feed zeigen – mit Größe und optional Streich- und Aktionspreis.",
+  "description": "Bis zu 2 Reihen mit 4 (Standard), 3 oder 2 Produkten: quadratischer Freisteller (150px bei 4 Spalten), darunter zentriert Name, Größe und optional Preis (Streichpreis durchgestrichen, Aktionspreis rot fett, mit *). Bilder und Namen verlinkt.",
+  "use_cases": [
+    "product_recommendations",
+    "sale_products",
+    "new_products",
+    "theme_products"
+  ],
+  "campaign_types": [
+    "sale",
+    "seasonal_campaign",
+    "new_arrivals",
+    "product_launch",
+    "gift_guide",
+    "product_recommendations",
+    "collection_spotlight"
+  ],
+  "position": {
+    "slot": "body",
+    "unique": false,
+    "max_per_newsletter": 3
+  },
+  "fields": {
+    "products": {
+      "type": "array",
+      "required": true,
+      "description": "2–8 Produkte; Anzahl muss ein Vielfaches von columns sein (max. 2 Reihen).",
+      "source": "product_feed",
+      "validation": {
+        "min_items": 2,
+        "max_items": 8,
+        "allowed_counts": [
+          2,
+          3,
+          4,
+          6,
+          8
+        ]
+      },
+      "item_fields": {
+        "sku": {
+          "type": "string",
+          "required": false,
+          "description": "Artikelnummer (Tracking/Abgleich, nicht sichtbar).",
+          "source": "product_feed",
+          "validation": {
+            "max_length": 64
+          }
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Produktname ohne Größe ('Teddy mit Herz').",
+          "source": "product_feed",
+          "validation": {
+            "min_length": 3,
+            "max_length": 40,
+            "recommended_max_length": 28
+          }
+        },
+        "subtitle": {
+          "type": "string",
+          "required": false,
+          "description": "Zweite Zeile, i. d. R. Größe ('20 cm') oder Farbe.",
+          "source": "product_feed",
+          "validation": {
+            "max_length": 30
+          }
+        },
+        "product_url": {
+          "type": "url",
+          "required": true,
+          "description": "Produktdetailseite.",
+          "source": "product_feed",
+          "validation": {
+            "https_only": true
+          }
+        },
+        "image": {
+          "type": "image",
+          "required": true,
+          "description": "Produkt-Freisteller quadratisch auf Weiß.",
+          "source": "product_feed",
+          "validation": {
+            "image_requirement": "product_image"
+          },
+          "fields": {
+            "url": {
+              "type": "url",
+              "required": true,
+              "description": "Absolute HTTPS-URL (Rapidmail-Medienarchiv c.emailsys1a.net oder teddy-hermann-shop.de; im Vorschaumodus auch relativ).",
+              "source": "product_feed",
+              "validation": {
+                "https_only": true
+              }
+            },
+            "alt": {
+              "type": "string",
+              "required": true,
+              "description": "Alternativtext. Bei Bildern mit eingebranntem Text MUSS der Bildtext enthalten sein (wird bei blockierten Bildern angezeigt).",
+              "source": "ai_agent",
+              "validation": {
+                "min_length": 3,
+                "max_length": 140
+              }
+            },
+            "width": {
+              "type": "integer",
+              "required": false,
+              "description": "Pixelbreite der Originaldatei – nötig für Verhältnis-/Auflösungsprüfung.",
+              "source": "product_feed",
+              "validation": {
+                "min": 1
+              }
+            },
+            "height": {
+              "type": "integer",
+              "required": false,
+              "description": "Pixelhöhe der Originaldatei.",
+              "source": "product_feed",
+              "validation": {
+                "min": 1
+              }
+            },
+            "asset_id": {
+              "type": "string",
+              "required": false,
+              "description": "Referenz im Bildreferenz-Format (registry/asset-reference-schema.json).",
+              "source": "product_feed"
+            },
+            "rights_status": {
+              "type": "enum",
+              "required": false,
+              "description": "Nutzungsfreigabe des Bildes.",
+              "source": "product_feed",
+              "values": [
+                "approved",
+                "pending",
+                "unknown",
+                "rejected"
+              ],
+              "default": "unknown"
+            }
+          }
+        },
+        "price": {
+          "type": "price",
+          "required": false,
+          "description": "Aktueller Preis. Ohne Preis wird nur Name/Größe gezeigt (halloween).",
+          "source": "product_feed",
+          "format": "Dezimalzahl; Ausgabe '16,99 €*'"
+        },
+        "old_price": {
+          "type": "price",
+          "required": false,
+          "description": "Streichpreis (nur mit price und > price) – durchgestrichen über dem Aktionspreis; Aktionspreis dann rot.",
+          "source": "product_feed"
+        },
+        "currency": {
+          "type": "enum",
+          "required": false,
+          "description": "Währung.",
+          "source": "product_feed",
+          "values": [
+            "EUR"
+          ],
+          "default": "EUR"
+        },
+        "price_prefix": {
+          "type": "string",
+          "required": false,
+          "description": "z. B. 'ab'.",
+          "source": "product_feed",
+          "validation": {
+            "max_length": 6
+          }
+        }
+      }
+    },
+    "columns": {
+      "type": "integer",
+      "required": false,
+      "description": "Produkte je Reihe: 4 = Standard (Referenzen), 3, 2. Mobil: 4 → 2×2, 2 bleibt 2, 3 stapelt.",
+      "source": "ai_agent",
+      "default": 4,
+      "validation": {
+        "min": 2,
+        "max": 4
+      }
+    },
+    "headline": {
+      "type": "string",
+      "required": false,
+      "description": "Optionale zentrierte Überschrift über dem Raster (in Referenzen nicht genutzt).",
+      "source": "ai_agent",
+      "validation": {
+        "max_length": 60
+      }
+    },
+    "headline_color": {
+      "type": "enum",
+      "required": false,
+      "description": "accent = Rot #ff0000 (8/10, Standard), dark = Dunkelgrau #545654 (Service-/Gewinnspieltexte: versandkostenfrei, schulstart, muttertag, sommersuchspiel).",
+      "source": "ai_agent",
+      "values": [
+        "accent",
+        "dark"
+      ],
+      "default": "accent"
+    },
+    "show_price_asterisk": {
+      "type": "boolean",
+      "required": false,
+      "description": "* hinter Preisen (Verweis auf MwSt.-Hinweis im Footer) – Standard wie Referenz.",
+      "source": "static_default",
+      "default": true
+    },
+    "spacing_top": {
+      "type": "enum",
+      "required": false,
+      "description": "Abstand oben. none = 0, s = 20px, m = 30px, l = 50px.",
+      "source": "static_default",
+      "values": [
+        "none",
+        "s",
+        "m",
+        "l"
+      ],
+      "default": "none"
+    },
+    "spacing_bottom": {
+      "type": "enum",
+      "required": false,
+      "description": "Abstand unten. none = 0, s = 20px, m = 30px, l = 50px.",
+      "source": "static_default",
+      "values": [
+        "none",
+        "s",
+        "m",
+        "l"
+      ],
+      "default": "s"
+    }
+  },
+  "image_requirements": [
+    {
+      "key": "product_image",
+      "field": "products[].image",
+      "image_type": "product",
+      "aspect_ratio": "1:1",
+      "aspect_ratio_alternatives": [
+        "9:10"
+      ],
+      "display_width": 150,
+      "min_width": 600,
+      "formats": [
+        "jpg",
+        "jpeg",
+        "png"
+      ],
+      "alt_required": true,
+      "crop": "kein Zuschnitt",
+      "focus": "Freisteller auf Weiß, Tier mittig",
+      "usage": "Produktfreisteller aus dem Feed",
+      "rendering": "img"
+    }
+  ],
+  "layout": {
+    "desktop_columns": [
+      2,
+      3,
+      4
+    ],
+    "mobile_columns": [
+      2,
+      1,
+      2
+    ],
+    "full_width": false,
+    "uses_background_image": false,
+    "approx_height_px": {
+      "desktop_row": 250,
+      "mobile_row": 260
+    },
+    "space_weight": "l"
+  },
+  "constraints": [
+    "count_multiple_of_columns",
+    "max_two_rows",
+    "old_price_requires_price_and_greater",
+    "price_note_in_footer_when_prices"
+  ],
+  "exclusion_criteria": [
+    "Nur 1 Produkt → TH_IMAGE_TEXT_01.",
+    "Keine Freisteller (nur Milieubilder) → TH_IMAGE_TEXT_01 oder TH_BANNER_01."
+  ],
+  "compatibility": {
+    "recommended_after": [
+      "TH_TEXT_01",
+      "TH_IMAGE_TEXT_01"
+    ],
+    "recommended_before": [
+      "TH_BANNER_01",
+      "TH_FOOTER_01"
+    ],
+    "avoid_adjacent": [
+      "TH_PRODUCT_GRID_01"
+    ],
+    "hard_dependencies": []
+  },
+  "ai_hints": {
+    "when_to_use": "Wenn der Feed passende Produkte liefert (Neuheiten, Aktionsartikel).",
+    "when_not_to_use": "Bei reinen Gewinnspiel-/Service-Mailings ohne Produktbezug.",
+    "content_guidelines": "Produktnamen wie im Shop, ohne Größe (Größe in subtitle). Bei Rabattaktionen old_price + price setzen; der Footer zeigt den MwSt.-Hinweis dann automatisch. Für 8 Produkte zwei Reihen à 4 oder zwei getrennte Raster mit Zwischenbaustein (halloween)."
+  }
+}

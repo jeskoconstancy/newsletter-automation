@@ -1,0 +1,6 @@
+{{!-- TH_DIVIDER_01 · 2px-Linie in Rot (#ff2600), 90 % der Textbreite, zentriert (geschenke_valentin) --}}
+<mj-section padding="0 {{t.layout.section_padding_x}}px" css-class="th-divider">
+  <mj-column>
+    <mj-divider border-color="{{t.color.divider}}" border-width="{{t.component.divider.width}}" border-style="{{t.component.divider.style}}" width="{{t.layout.divider_width_percent}}%" align="center" padding="{{dividerPad d.spacing}}px {{t.layout.column_padding}}px" />
+  </mj-column>
+</mj-section>

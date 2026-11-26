@@ -1,0 +1,16 @@
+{{!-- CA_TEXT_01 · Textbaustein: Headline (21 oder 26px fett), Unterzeile, Absätze, optional hervorgehobener Satz (fett, 21px) nach dem ersten Absatz, Kleingedrucktes und Button. Zentriert oder linksbündig, auf Weiß oder in einer Farbfläche. --}}
+{{#if (spacing d.spacing_top)}}{{> ca-gap h=(spacing d.spacing_top)}}{{/if}}
+{{#with (lookup t.palette d.panel_color)}}
+<mj-section padding="{{#if (eq ../d.panel_color "keine")}}0 {{#if (eq ../d.align "center")}}23px{{else}}0{{/if}}{{else}}24px 48px{{/if}}"{{#unless (eq ../d.panel_color "keine")}} background-color="{{bg}}"{{/unless}} css-class="ca-text{{#unless (eq ../d.panel_color "keine")}} ca-pad{{/unless}}">
+  <mj-column>
+    <mj-text align="{{../d.align}}" color="{{text}}"{{#if (eq ../d.panel_color "keine")}} css-class="ca-pad"{{/if}}>
+      {{#if ../d.headline}}<h2 style="margin:0;font-size:{{#if (eq ../d.headline_size "l")}}26px;line-height:31px{{else}}21px;line-height:25px{{/if}};font-weight:700;color:{{text}};">{{nl2br ../d.headline}}</h2>{{/if}}
+      {{#if ../d.subline}}<div style="font-size:18px;line-height:22px;">{{../d.subline}}</div>{{/if}}
+      {{#each ../d.paragraphs}}<p style="margin:{{#if (or @index ../../d.headline ../../d.subline)}}20px{{else}}0{{/if}} 0 0;">{{rt this}}</p>{{#if (and @first ../../d.highlight)}}<p style="margin:20px 0 0;font-size:21px;line-height:30px;font-weight:700;">{{rt ../../d.highlight}}</p>{{/if}}{{/each}}
+      {{#if (and ../d.highlight (not ../d.paragraphs))}}<p style="margin:{{#if (or ../d.headline ../d.subline)}}20px{{else}}0{{/if}} 0 0;font-size:21px;line-height:30px;font-weight:700;">{{rt ../d.highlight}}</p>{{/if}}
+      {{#if ../d.note}}<p style="margin:16px 0 0;font-size:{{../t.type.note.size}};line-height:{{../t.type.note.line_height}};">{{../d.note}}</p>{{/if}}
+    </mj-text>
+    {{#if (and ../d.cta_label ../d.cta_url)}}{{> ca-button label=../d.cta_label url=../d.cta_url bg=button color=button_text align=../d.align padding="25px 0 0" css=(pick ../d.panel_color "keine=ca-pad" "ca-btn")}}{{/if}}
+  </mj-column>
+</mj-section>
+{{/with}}

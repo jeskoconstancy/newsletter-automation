@@ -1,0 +1,74 @@
+{
+  "id": "TH_SPACER_01",
+  "brand": "teddy-hermann",
+  "name": "Abstand",
+  "version": "1.0.0",
+  "category": "utility",
+  "status": "derived",
+  "purpose": "Zusätzlicher vertikaler Leerraum.",
+  "description": "Leerfläche (weiß) mit fester Höhe.",
+  "use_cases": [
+    "spacing"
+  ],
+  "campaign_types": [
+    "seasonal_campaign",
+    "sale",
+    "voucher",
+    "gift_guide",
+    "new_arrivals",
+    "product_launch",
+    "collection_spotlight",
+    "contest",
+    "free_gift",
+    "free_shipping",
+    "product_recommendations",
+    "brand_story"
+  ],
+  "position": {
+    "slot": "body",
+    "unique": false,
+    "max_per_newsletter": 4
+  },
+  "fields": {
+    "height": {
+      "type": "integer",
+      "required": false,
+      "description": "Höhe in px.",
+      "source": "static_default",
+      "default": 20,
+      "validation": {
+        "min": 5,
+        "max": 80
+      }
+    }
+  },
+  "image_requirements": [],
+  "layout": {
+    "desktop_columns": 1,
+    "mobile_columns": 1,
+    "full_width": false,
+    "uses_background_image": false,
+    "approx_height_px": {
+      "desktop": 20,
+      "mobile": 20
+    },
+    "space_weight": "xs"
+  },
+  "constraints": [],
+  "exclusion_criteria": [
+    "Nicht zur Korrektur von Bausteinabständen – dafür spacing_* der Bausteine."
+  ],
+  "compatibility": {
+    "recommended_after": [],
+    "recommended_before": [],
+    "avoid_adjacent": [
+      "TH_SPACER_01"
+    ],
+    "hard_dependencies": []
+  },
+  "ai_hints": {
+    "when_to_use": "Selten.",
+    "when_not_to_use": "Standardmäßig nicht nötig.",
+    "content_guidelines": "–"
+  }
+}

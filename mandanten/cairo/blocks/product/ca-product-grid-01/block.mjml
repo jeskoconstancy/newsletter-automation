@@ -1,0 +1,24 @@
+{{!-- CA_PRODUCT_GRID_01 · 2 oder 4 Produkte in 2 Spalten (je 288px, 24px Abstand): Bild, darunter Modellname + Produktart; Preis und Button rechtsbündig (layout panel, Farbfläche) bzw. alles zentriert ohne Fläche (layout plain). Mobil untereinander. --}}
+{{#if (spacing d.spacing_top)}}{{> ca-gap h=(spacing d.spacing_top)}}{{/if}}
+{{#if (or d.heading_bold d.heading_light)}}{{> ca-heading bold=d.heading_bold light=d.heading_light bold_first=d.heading_bold_first color=(lookup t.heading_colors d.heading_color)}}{{/if}}
+{{#with (lookup t.palette (concat d.panel_color (pick d.layout "plain=_plain" "")))}}
+{{#each (chunk ../d.items 2)}}
+<mj-section padding="0" css-class="ca-grid">
+  {{#each this}}
+  <mj-column width="50%" vertical-align="top" padding="{{#if @first}}0 12px 0 0{{else}}0 0 0 12px{{/if}}"{{#if (eq ../../../d.layout "panel")}} inner-background-color="{{../../bg}}"{{/if}} css-class="{{#if @first}}ca-gl{{else}}ca-gr{{/if}}">
+    <mj-image src="{{asset (fallback image.url product.image.url)}}" alt="{{fallback image.alt (fallback product.image.alt headline)}}" title="{{headline}}" href="{{link (fallback product.product_url (fallback link_url ../../../d.link_url))}}" width="288px" fluid-on-mobile="true" />
+    <mj-text padding="{{#if (eq ../../../d.layout "panel")}}18px 18px 0{{else}}14px 0 0{{/if}}" align="{{#if (eq ../../../d.layout "panel")}}left{{else}}center{{/if}}" color="{{../../text}}">
+      <div style="font-size:21px;line-height:25px;font-weight:700;"><a href="{{link (fallback product.product_url (fallback link_url ../../../d.link_url))}}" style="color:{{../../text}};text-decoration:none;">{{headline}}</a></div>
+      {{#if subtitle}}<div style="font-size:18px;line-height:22px;">{{subtitle}}</div>{{/if}}
+    </mj-text>
+    {{#if product.price}}
+    <mj-text padding="{{#if (eq ../../../d.layout "panel")}}24px 18px 0{{else}}16px 0 0{{/if}}" align="{{#if (eq ../../../d.layout "panel")}}right{{else}}center{{/if}}" color="{{../../text}}">{{> ca-price p=product prefix=price_prefix color=../../text muted=../../muted t=../../../t}}</mj-text>
+    {{/if}}
+    {{> ca-button label=(fallback cta_label ../../../t.labels.product_cta) url=(fallback product.product_url (fallback link_url ../../../d.link_url)) bg=../../button color=../../button_text align=(pick ../../../d.layout "plain=center" "right") padding=(pick ../../../d.layout "plain=18px 0 0" "18px 18px 0")}}
+    {{#if (eq ../../../d.layout "panel")}}<mj-spacer height="18px" />{{/if}}
+  </mj-column>
+  {{/each}}
+</mj-section>
+{{#unless @last}}{{> ca-gap h=24}}{{/unless}}
+{{/each}}
+{{/with}}

@@ -1,0 +1,35 @@
+{{!-- PRODUCT_GRID_01 · 2, 3 oder 4 Produkte (4 = 2×2) als weiße Produktkarten im Stil der Textkarte.
+     ABGELEITET: In den 9 Referenzen gibt es keine Produktkarten mit Preis. Gestaltung ausschließlich aus Tokens
+     (Karte = surface, Name/Preis = Work Sans bold, Link = Textlink mit ➞, Badge = Headline-Highlight). --}}
+{{#if d.headline}}
+<mj-section background-color="{{t.color.page_background}}" padding="0 {{t.layout.section_padding_x}}px 10px">
+  <mj-column padding="10px">
+    <mj-text align="center" css-class="nl-section-heading">
+      <div style="font-size:{{t.type.section_heading.size}};line-height:{{t.type.section_heading.line_height}};font-weight:700;color:{{t.color.heading_accent}};">{{d.headline}}</div>
+    </mj-text>
+  </mj-column>
+</mj-section>
+{{/if}}
+{{#each (chunk d.products (gridColumns d.products.length))}}
+<mj-section background-color="{{../t.color.page_background}}" padding="0 {{../t.layout.section_padding_x}}px">
+  {{#each this}}
+    <mj-column width="{{colWidth (gridColumns ../../d.products.length)}}" padding="10px" inner-background-color="{{../../t.color.surface}}" background-color="{{../../t.color.page_background}}" vertical-align="top">
+      <mj-image src="{{asset image.url}}" alt="{{image.alt}}" href="{{link product_url}}" padding="0" fluid-on-mobile="true" />
+      <mj-text padding="16px 16px 0">
+        {{#if badge}}<p style="margin:0 0 8px;"><span style="display:inline-block;background-color:{{../../t.color.headline_highlight}};color:{{../../t.color.text_inverse}};font-size:12px;line-height:18px;font-weight:700;padding:1px 6px;text-transform:uppercase;">{{badge}}</span></p>{{else}}{{#if (anyHas ../../d.products "badge")}}<p class="nl-hide-mobile" style="margin:0 0 8px;font-size:12px;line-height:20px;">&nbsp;</p>{{/if}}{{/if}}
+        <p style="margin:0;font-size:{{../../t.type.product_name.size}};line-height:{{../../t.type.product_name.line_height}};font-weight:700;"><a href="{{link product_url}}" style="color:{{../../t.color.text}};text-decoration:none;">{{name}}</a></p>
+        {{#if description}}<p style="margin:6px 0 0;font-size:13px;line-height:19px;">{{description}}</p>{{/if}}
+        <p style="margin:10px 0 0;line-height:{{../../t.type.product_price.line_height}};">{{#if price_prefix}}<span style="font-size:13px;">{{price_prefix}} </span>{{/if}}<span style="font-size:{{../../t.type.product_price.size}};font-weight:700;color:{{../../t.color.heading_accent}};">{{price price currency}}{{#if ../../d.show_price_asterisk}}*{{/if}}</span>{{#if old_price}} <span class="nl-strike" style="font-size:{{../../t.type.product_old_price.size}};color:{{../../t.type.product_old_price.color}};text-decoration:line-through;">{{price old_price currency}}</span>{{/if}}</p>
+      </mj-text>
+      <mj-text padding="12px 16px 18px">{{> text-link label=(fallback cta_label ../../d.cta_label) url=product_url t=../../t}}</mj-text>
+    </mj-column>
+  {{/each}}
+</mj-section>
+{{/each}}
+{{#if d.cta_url}}
+<mj-section background-color="{{t.color.page_background}}" padding="20px {{t.layout.section_padding_x}}px 0">
+  <mj-column padding="10px">
+    {{> button label=d.cta_label_all url=d.cta_url align="center"}}
+  </mj-column>
+</mj-section>
+{{/if}}

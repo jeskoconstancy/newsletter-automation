@@ -1,0 +1,323 @@
+{
+  "id": "CA_FOOTER_01",
+  "brand": "cairo",
+  "name": "Footer – Hinweise, graue Kontaktfläche, Bedingungen",
+  "version": "1.0.0",
+  "category": "footer",
+  "status": "stable",
+  "purpose": "Pflichtangaben, Kontakt, Social, Abmeldung und Aktionsbedingungen.",
+  "description": "B2B-Hinweis 'Angebote für Industrie, Handel, Gewerbe, Dienstleister und Freiberufler.' + '*Alle Preise zuzüglich MwSt. und Versandkosten.' · graue Fläche (#f2f2f2): CAIRO-Logo, Kontakt, Firmenanschrift | Trusted-Shops-Siegel, 'Folgen Sie uns' + Instagram/Pinterest, Vorteile/Impressum/Datenschutz/Abbestellen · optional 'Dieser Newsletter wurde gesendet an' · optional Aktionsbedingungen (**) als Kleingedrucktes.",
+  "use_cases": [],
+  "campaign_types": [
+    "seasonal_campaign",
+    "sale",
+    "voucher",
+    "gift_guide",
+    "new_arrivals",
+    "product_launch",
+    "collection_spotlight",
+    "black_week",
+    "contest",
+    "free_gift",
+    "free_shipping",
+    "product_recommendations",
+    "brand_story"
+  ],
+  "position": {
+    "slot": "last",
+    "unique": true,
+    "max_per_newsletter": 1
+  },
+  "fields": {
+    "footer_logo": {
+      "type": "object",
+      "required": true,
+      "description": "CAIRO-Logo.",
+      "source": "shop_profile",
+      "default_from": "shop.footer_logo",
+      "fields": {
+        "url": {
+          "type": "url",
+          "required": true,
+          "description": "PNG.",
+          "source": "shop_profile",
+          "validation": {
+            "https_only": true
+          }
+        },
+        "alt": {
+          "type": "string",
+          "required": true,
+          "description": "Alt.",
+          "source": "shop_profile"
+        },
+        "width": {
+          "type": "integer",
+          "required": true,
+          "description": "Breite.",
+          "source": "shop_profile",
+          "default": 100,
+          "validation": {
+            "min": 40,
+            "max": 160
+          }
+        }
+      }
+    },
+    "trust_seal": {
+      "type": "object",
+      "required": false,
+      "description": "Trusted-Shops-Siegel.",
+      "source": "shop_profile",
+      "default_from": "shop.trust_seal",
+      "fields": {
+        "url": {
+          "type": "url",
+          "required": false,
+          "description": "PNG.",
+          "source": "shop_profile"
+        },
+        "alt": {
+          "type": "string",
+          "required": false,
+          "description": "Alt.",
+          "source": "shop_profile"
+        },
+        "width": {
+          "type": "integer",
+          "required": false,
+          "description": "Breite.",
+          "source": "shop_profile"
+        },
+        "link_url": {
+          "type": "url",
+          "required": false,
+          "description": "Ziel.",
+          "source": "shop_profile"
+        }
+      }
+    },
+    "shop_url": {
+      "type": "url",
+      "required": true,
+      "description": "Shop-URL.",
+      "source": "shop_profile",
+      "default_from": "shop.urls.shop",
+      "validation": {
+        "https_only": true
+      }
+    },
+    "contact": {
+      "type": "object",
+      "required": true,
+      "description": "Hotline, Fax, E-Mail.",
+      "source": "shop_profile",
+      "default_from": "shop.contact",
+      "fields": {
+        "hotline": {
+          "type": "string",
+          "required": true,
+          "description": "Hotline.",
+          "source": "shop_profile"
+        },
+        "fax": {
+          "type": "string",
+          "required": false,
+          "description": "Fax.",
+          "source": "shop_profile"
+        },
+        "email": {
+          "type": "string",
+          "required": true,
+          "description": "E-Mail.",
+          "source": "shop_profile",
+          "validation": {
+            "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+          }
+        }
+      }
+    },
+    "social": {
+      "type": "array",
+      "required": false,
+      "description": "Social-Icons.",
+      "source": "shop_profile",
+      "default_from": "shop.social",
+      "item_fields": {
+        "icon": {
+          "type": "url",
+          "required": true,
+          "description": "Icon.",
+          "source": "shop_profile"
+        },
+        "alt": {
+          "type": "string",
+          "required": true,
+          "description": "Alt.",
+          "source": "shop_profile"
+        },
+        "width": {
+          "type": "integer",
+          "required": false,
+          "description": "Breite.",
+          "source": "shop_profile"
+        },
+        "url": {
+          "type": "url",
+          "required": true,
+          "description": "Ziel.",
+          "source": "shop_profile"
+        }
+      }
+    },
+    "legal": {
+      "type": "object",
+      "required": true,
+      "description": "Firma, Anschrift, Hinweise, Links.",
+      "source": "shop_profile",
+      "default_from": "shop.legal",
+      "fields": {
+        "company_lines": {
+          "type": "paragraphs",
+          "required": true,
+          "description": "Firmenname (fett).",
+          "source": "shop_profile",
+          "validation": {
+            "min_items": 1,
+            "max_items": 3
+          }
+        },
+        "address_lines": {
+          "type": "paragraphs",
+          "required": true,
+          "description": "Anschrift.",
+          "source": "shop_profile",
+          "validation": {
+            "min_items": 2,
+            "max_items": 4
+          }
+        },
+        "operator": {
+          "type": "string",
+          "required": true,
+          "description": "Betreiber einzeilig.",
+          "source": "shop_profile",
+          "validation": {
+            "min_length": 10
+          }
+        },
+        "b2b_note": {
+          "type": "string",
+          "required": true,
+          "description": "B2B-Hinweis.",
+          "source": "shop_profile"
+        },
+        "price_note": {
+          "type": "string",
+          "required": false,
+          "description": "Preishinweis.",
+          "source": "shop_profile"
+        },
+        "links": {
+          "type": "array",
+          "required": true,
+          "description": "Links.",
+          "source": "shop_profile",
+          "item_fields": {
+            "label": {
+              "type": "string",
+              "required": true,
+              "description": "Text.",
+              "source": "shop_profile"
+            },
+            "url": {
+              "type": "url",
+              "required": true,
+              "description": "Ziel.",
+              "source": "shop_profile"
+            }
+          }
+        },
+        "unsubscribe_label": {
+          "type": "string",
+          "required": true,
+          "description": "Linktext Abmeldung.",
+          "source": "shop_profile"
+        }
+      }
+    },
+    "unsubscribe_url": {
+      "type": "url_or_merge_tag",
+      "required": true,
+      "description": "Abmeldelink (shop.esp.unsubscribe_url). PFLICHT.",
+      "source": "esp",
+      "default_from": "shop.esp.unsubscribe_url"
+    },
+    "recipient_email_tag": {
+      "type": "string",
+      "required": false,
+      "description": "ESP-Platzhalter für die Empfängeradresse. Leer = Zeile ausgeblendet.",
+      "source": "esp",
+      "default_from": "shop.esp.recipient_email_tag"
+    },
+    "show_price_note": {
+      "type": "boolean",
+      "required": false,
+      "description": "'*Alle Preise zuzüglich MwSt. und Versandkosten.' – bei Cairo immer sichtbar (Standard true), da Preise in Karten/Raster stets mit * erscheinen.",
+      "source": "static_default",
+      "default": true
+    },
+    "footnote": {
+      "type": "rich_text",
+      "required": false,
+      "description": "NUR wenn das Briefing Aktionsbedingungen nennt: ausführliche Bedingungen, beginnend mit '**Gültig …' (Zeitraum, Mindestbestellwert, Ausschlüsse, nicht kombinierbar, solange Vorrat reicht). Nichts erfinden – sonst weglassen.",
+      "source": "campaign_brief",
+      "validation": {
+        "max_length": 1400
+      }
+    }
+  },
+  "image_requirements": [
+    {
+      "key": "footer_logo",
+      "field": "footer_logo",
+      "image_type": "logo",
+      "aspect_ratio": null,
+      "display_width": 100,
+      "formats": [
+        "png"
+      ],
+      "alt_required": true,
+      "rendering": "img"
+    }
+  ],
+  "layout": {
+    "desktop_columns": 2,
+    "mobile_columns": 1,
+    "full_width": true,
+    "uses_background_image": false,
+    "approx_height_px": {
+      "desktop": 560,
+      "mobile": 900
+    }
+  },
+  "constraints": [
+    "must_be_last_block",
+    "requires_unsubscribe_link"
+  ],
+  "exclusion_criteria": [],
+  "compatibility": {
+    "recommended_after": [
+      "CA_USP_01",
+      "CA_CATALOG_01"
+    ],
+    "recommended_before": [],
+    "avoid_adjacent": [],
+    "hard_dependencies": []
+  },
+  "ai_hints": {
+    "when_to_use": "Immer als letzter Baustein.",
+    "when_not_to_use": "Nie weglassen.",
+    "content_guidelines": "data {} – Ausnahme: footnote, wenn das Briefing Aktionsbedingungen enthält (Texte mit ** verweisen darauf)."
+  }
+}

@@ -1,0 +1,7 @@
+{{!-- TH_HERO_01 · Aufmacher-Banner 700px: fertig gestaltetes Kampagnenbild (Text/Button sind im Bild), komplett verlinkt.
+     Kein HTML-Text auf dem Bild – deshalb ist der ALT-Text Pflicht und muss den Bildtext wiedergeben. --}}
+<mj-section padding="0" css-class="th-hero"{{#if d.fallback_color}} background-color="{{d.fallback_color}}"{{/if}}>
+  <mj-column>
+    <mj-image src="{{asset d.image.url}}" alt="{{d.image.alt}}" title="{{d.image.alt}}" href="{{link d.link_url}}" width="{{t.layout.content_width}}px" align="center" />
+  </mj-column>
+</mj-section>

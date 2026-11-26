@@ -1,0 +1,260 @@
+{
+  "id": "IMAGE_GRID_01",
+  "brand": "seltmann-weiden",
+  "name": "Bildkacheln – 1 bis 3 verlinkte Bilder je Reihe",
+  "version": "1.0.0",
+  "category": "category",
+  "status": "stable",
+  "purpose": "Visuelle Ergänzung mit verlinkten Kollektions-/Kategoriebildern; optional mit Zwischenüberschrift und Button.",
+  "description": "Raster aus 1, 2 oder 3 gleich großen Bildern pro Reihe (700/340/220px, 20px Abstand), max. 2 Reihen. Jedes Bild kann verlinkt werden. Optional zentrierte Überschrift darüber und Button darunter (blackweek-Muster). In 8/9 Referenzen.",
+  "use_cases": [
+    "visual_supplement",
+    "category_tiles",
+    "collection_impressions",
+    "single_image"
+  ],
+  "campaign_types": [
+    "collection_spotlight",
+    "sale",
+    "seasonal_campaign",
+    "product_launch",
+    "new_arrivals",
+    "gift_guide",
+    "voucher",
+    "black_week",
+    "brand_story",
+    "product_recommendations"
+  ],
+  "position": {
+    "slot": "body",
+    "unique": false,
+    "max_per_newsletter": 3
+  },
+  "fields": {
+    "columns": {
+      "type": "integer",
+      "required": true,
+      "description": "Bilder pro Reihe.",
+      "source": "ai_agent",
+      "default": 3,
+      "validation": {
+        "min": 1,
+        "max": 3
+      }
+    },
+    "images": {
+      "type": "array",
+      "required": true,
+      "description": "Bilder; Anzahl muss ein Vielfaches von columns sein (max. 2 Reihen).",
+      "source": "asset_pipeline",
+      "validation": {
+        "min_items": 1,
+        "max_items": 6
+      },
+      "item_fields": {
+        "image": {
+          "type": "image",
+          "required": true,
+          "description": "Kachelbild.",
+          "source": "asset_pipeline",
+          "validation": {
+            "image_requirement": "tile_image"
+          },
+          "fields": {
+            "url": {
+              "type": "url",
+              "required": true,
+              "description": "Absolute HTTPS-URL des Bildes (im Vorschaumodus auch relativ).",
+              "source": "asset_pipeline",
+              "validation": {
+                "https_only": true
+              }
+            },
+            "alt": {
+              "type": "string",
+              "required": true,
+              "description": "Alternativtext, beschreibt den sichtbaren Bildinhalt (nicht den Dateinamen).",
+              "source": "ai_agent",
+              "validation": {
+                "min_length": 3,
+                "max_length": 140
+              }
+            },
+            "width": {
+              "type": "integer",
+              "required": false,
+              "description": "Pixelbreite der Originaldatei – nötig für Verhältnis-/Auflösungsprüfung.",
+              "source": "asset_pipeline",
+              "validation": {
+                "min": 1
+              }
+            },
+            "height": {
+              "type": "integer",
+              "required": false,
+              "description": "Pixelhöhe der Originaldatei.",
+              "source": "asset_pipeline",
+              "validation": {
+                "min": 1
+              }
+            },
+            "asset_id": {
+              "type": "string",
+              "required": false,
+              "description": "Referenz auf das Asset im Bildreferenz-Format (asset-reference-schema.json).",
+              "source": "asset_pipeline"
+            },
+            "rights_status": {
+              "type": "enum",
+              "required": false,
+              "description": "Nutzungsfreigabe des Bildes.",
+              "source": "asset_pipeline",
+              "values": [
+                "approved",
+                "pending",
+                "unknown",
+                "rejected"
+              ],
+              "default": "unknown"
+            }
+          }
+        },
+        "link_url": {
+          "type": "url",
+          "required": false,
+          "description": "Ziel beim Klick (Kollektion/Kategorie).",
+          "source": "campaign_brief",
+          "validation": {
+            "https_only": true
+          }
+        }
+      }
+    },
+    "aspect_ratio": {
+      "type": "enum",
+      "required": false,
+      "description": "Gemeinsames Seitenverhältnis aller Kacheln.",
+      "source": "asset_pipeline",
+      "values": [
+        "1:1",
+        "2:3",
+        "3:4",
+        "3:2",
+        "16:9",
+        "6:5"
+      ],
+      "default": "1:1"
+    },
+    "headline": {
+      "type": "string",
+      "required": false,
+      "description": "Zentrierte Überschrift über dem Raster.",
+      "source": "ai_agent",
+      "validation": {
+        "max_length": 60
+      }
+    },
+    "cta_label": {
+      "type": "string",
+      "required": false,
+      "description": "Button unter dem Raster (➞ automatisch).",
+      "source": "ai_agent",
+      "default": "Jetzt entdecken",
+      "validation": {
+        "max_length": 40
+      }
+    },
+    "cta_url": {
+      "type": "url",
+      "required": false,
+      "description": "Ziel des Buttons. Ohne URL kein Button.",
+      "source": "campaign_brief",
+      "validation": {
+        "https_only": true
+      }
+    },
+    "mobile_stack": {
+      "type": "boolean",
+      "required": false,
+      "description": "true = Kacheln mobil untereinander (Referenzverhalten); false = nebeneinander bleiben (nur bei 2 Spalten sinnvoll).",
+      "source": "static_default",
+      "default": true
+    }
+  },
+  "item_count": {
+    "images": {
+      "min": 1,
+      "max": 6,
+      "rule": "len(images) % columns == 0"
+    }
+  },
+  "image_requirements": [
+    {
+      "key": "tile_image",
+      "field": "images[].image",
+      "image_type": "lifestyle",
+      "aspect_ratio": "parameter:aspect_ratio",
+      "aspect_ratio_alternatives": [
+        "1:1 (Standard)",
+        "2:3",
+        "3:4",
+        "3:2",
+        "16:9"
+      ],
+      "display_width": 220,
+      "min_width": 500,
+      "formats": [
+        "jpg",
+        "jpeg",
+        "png",
+        "gif"
+      ],
+      "alt_required": true,
+      "crop": "Vorab exakt auf aspect_ratio zuschneiden – kein Beschnitt im HTML",
+      "focus": "zentriert",
+      "usage": "Detail-/Lifestyle-Aufnahmen der Kollektion, Kategorien",
+      "rendering": "img"
+    }
+  ],
+  "layout": {
+    "desktop_columns": "parameter:columns (1–3)",
+    "mobile_columns": "1 (mobile_stack=true) | columns",
+    "full_width": false,
+    "uses_background_image": false,
+    "approx_height_px": {
+      "3_cols_1_1": 240,
+      "2_cols_1_1": 360,
+      "1_col_6_5": 600
+    },
+    "space_weight": "m"
+  },
+  "constraints": [
+    "images_count_multiple_of_columns",
+    "all_images_same_aspect_ratio",
+    "all_images_need_alt",
+    "min_resolution_2x_display"
+  ],
+  "exclusion_criteria": [
+    "Weniger Bilder als columns verfügbar → columns reduzieren.",
+    "Produktbilder mit Preis → PRODUCT_GRID_01 verwenden."
+  ],
+  "compatibility": {
+    "recommended_after": [
+      "INTRO_TEXT_01",
+      "EDITORIAL_CARD_01",
+      "TEXT_BLOCK_01"
+    ],
+    "recommended_before": [
+      "DIVIDER_01"
+    ],
+    "avoid_adjacent": [
+      "IMAGE_GRID_01"
+    ],
+    "hard_dependencies": []
+  },
+  "ai_hints": {
+    "when_to_use": "Nach Intro (3 Kacheln) oder nach Editorial-Karte (2 Kacheln) – typische Referenzfolge.",
+    "when_not_to_use": "Bei uneinheitlichen Bildformaten ohne Zuschnitt.",
+    "content_guidelines": "columns=3 bei quadratischen Detailbildern, columns=2 bei Hoch-/Querformat, columns=1 für ein starkes Einzelbild."
+  }
+}

@@ -1,0 +1,22 @@
+{{!-- FOOTER_01 · Primärfarben-Fläche: Social-Icons, kurze Linie, Kontakt, Abo-Hinweis mit Abmeldelink, Copyright/Betreiber, Preishinweis.
+     Pflichtinhalte (Abmeldelink, Betreiber) werden validiert – der Footer darf nicht ohne Abmeldelink gerendert werden. --}}
+{{#if (and d.show_social (anyHas d.social "url"))}}
+<mj-section full-width="full-width" background-color="{{t.color.primary}}" padding="26px {{t.layout.section_padding_x}}px 0">
+  <mj-column padding="10px">
+    <mj-social mode="horizontal" align="center" icon-size="{{t.image.social_icon_size}}px" padding="0" inner-padding="0">
+      {{#each d.social}}{{#if url}}<mj-social-element src="{{asset icon_url}}" href="{{link url}}" alt="{{label}}" title="{{label}}" background-color="transparent" padding="0 6px" icon-padding="0" icon-size="{{../t.image.social_icon_size}}px"></mj-social-element>{{/if}}
+      {{/each}}
+    </mj-social>
+  </mj-column>
+</mj-section>
+{{/if}}
+<mj-section full-width="full-width" background-color="{{t.color.primary}}" padding="{{#if (and d.show_social (anyHas d.social "url"))}}20px{{else}}40px{{/if}} 0 72px">
+  <mj-column>
+    <mj-divider border-color="{{t.color.footer_rule}}" border-width="1px" width="40px" align="center" padding="12px 0 26px" />
+    <mj-text align="center" color="{{t.color.text_inverse}}" font-size="{{t.type.footer.size}}" line-height="{{t.type.footer.line_height}}" padding="0 20px">
+      <p style="margin:0 0 18px;">Tel.: {{d.contact.phone}} - E-Mail: <a href="mailto:{{d.contact.email}}" style="color:{{t.color.text_inverse}};text-decoration:none;">{{d.contact.email}}</a> - <a href="{{link d.shop_url}}" style="color:{{t.color.text_inverse}};text-decoration:none;">{{d.website_display}}</a></p>
+      <p style="margin:0 0 18px;">{{d.legal.subscription_reason}} {{unsubscribe d.legal.unsubscribe_sentence d.legal.unsubscribe_link_label d.unsubscribe_url}} Copyright &copy; {{year}} {{d.legal.copyright_holder}} / {{d.legal.operator}}, {{d.legal.rights}}</p>
+      {{#if d.show_price_note}}<p style="margin:0;">{{d.legal.price_note}}</p>{{/if}}
+    </mj-text>
+  </mj-column>
+</mj-section>

@@ -1,0 +1,6 @@
+{{!-- TH_HEADER_01 · Weiße Fläche, Logo-Bild (Schriftzug + Siegel) zentriert, verlinkt auf den Shop. 10/10 Referenzen identisch. --}}
+<mj-section padding="{{t.layout.header_padding_y}}px 0" css-class="th-header">
+  <mj-column>
+    <mj-image src="{{asset d.logo.url}}" alt="{{d.logo.alt}}" width="{{d.logo.width}}px" align="center" href="{{link d.link_url}}" title="{{d.logo.alt}}" />
+  </mj-column>
+</mj-section>

@@ -1,0 +1,7 @@
+{{!-- CA_BANNER_01 · Zwischenbanner 600px: Kampagnengrafik (z. B. 'Mehrwertsteuer geschenkt', Aktionsbanner mit Codes) oder querformatige Wohnszene, verlinkt. Leitet einen Abschnitt ein oder wiederholt das Aktionsmotiv. --}}
+{{#if (spacing d.spacing_top)}}{{> ca-gap h=(spacing d.spacing_top)}}{{/if}}
+<mj-section padding="0" css-class="ca-banner">
+  <mj-column>
+    <mj-image src="{{asset d.image.url}}" alt="{{d.image.alt}}" title="{{d.image.alt}}"{{#if d.link_url}} href="{{link d.link_url}}"{{/if}} width="600px" />
+  </mj-column>
+</mj-section>

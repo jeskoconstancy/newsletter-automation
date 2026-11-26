@@ -1,0 +1,162 @@
+{
+  "id": "TEXT_BLOCK_01",
+  "brand": "seltmann-weiden",
+  "name": "Textblock – Zwischenüberschrift, Text, optionaler CTA",
+  "version": "1.0.0",
+  "category": "text",
+  "status": "stable",
+  "purpose": "Zusätzlicher Textabschnitt: Zwischenüberschrift für eine Folgesektion, Hinweis- oder Aktionstext (z. B. Gutschein).",
+  "description": "Optional zentrierte Zwischenüberschrift (26px, Primärfarbe), optional Fließtext, optional Button oder Textlink. Bildet die zentrierte Überschrift aus 'blackweek' und den zentrierten Gutschein-Hinweis aus 'lastminutegeschenk' ab.",
+  "use_cases": [
+    "section_heading",
+    "additional_information",
+    "voucher_hint",
+    "secondary_cta"
+  ],
+  "campaign_types": [
+    "collection_spotlight",
+    "sale",
+    "seasonal_campaign",
+    "product_launch",
+    "new_arrivals",
+    "gift_guide",
+    "voucher",
+    "black_week",
+    "brand_story",
+    "product_recommendations"
+  ],
+  "position": {
+    "slot": "body",
+    "unique": false,
+    "max_per_newsletter": 3
+  },
+  "fields": {
+    "headline": {
+      "type": "string",
+      "required": false,
+      "description": "Zwischenüberschrift.",
+      "source": "ai_agent",
+      "validation": {
+        "max_length": 60
+      }
+    },
+    "paragraphs": {
+      "type": "paragraphs",
+      "required": false,
+      "description": "Fließtext. Erlaubte Inline-Auszeichnung: <strong>, <em>, <br>. Kein weiteres HTML.",
+      "source": "ai_agent",
+      "validation": {
+        "min_items": 0,
+        "max_items": 3,
+        "item_max_length": 480,
+        "total_max_length": 1000
+      },
+      "format": "Array aus Absätzen (Strings)"
+    },
+    "align": {
+      "type": "enum",
+      "required": false,
+      "description": "Ausrichtung.",
+      "source": "static_default",
+      "values": [
+        "left",
+        "center"
+      ],
+      "default": "center"
+    },
+    "cta_label": {
+      "type": "string",
+      "required": false,
+      "description": "Text für Button/Link (➞ automatisch).",
+      "source": "ai_agent",
+      "default": "Jetzt entdecken",
+      "validation": {
+        "max_length": 40
+      }
+    },
+    "cta_url": {
+      "type": "url",
+      "required": false,
+      "description": "Ziel-URL. Ohne URL kein CTA.",
+      "source": "campaign_brief",
+      "validation": {
+        "https_only": true
+      }
+    },
+    "cta_style": {
+      "type": "enum",
+      "required": false,
+      "description": "button oder link.",
+      "source": "static_default",
+      "values": [
+        "button",
+        "link"
+      ],
+      "default": "button"
+    },
+    "spacing_top": {
+      "type": "enum",
+      "required": false,
+      "description": "Abstand oben (s=20px, m=30px, l=50px, none=0).",
+      "source": "static_default",
+      "values": [
+        "none",
+        "s",
+        "m",
+        "l"
+      ],
+      "default": "none"
+    },
+    "spacing_bottom": {
+      "type": "enum",
+      "required": false,
+      "description": "Abstand unten (s=20px, m=30px, l=50px, none=0).",
+      "source": "static_default",
+      "values": [
+        "none",
+        "s",
+        "m",
+        "l"
+      ],
+      "default": "m"
+    }
+  },
+  "image_requirements": [],
+  "layout": {
+    "desktop_columns": 1,
+    "mobile_columns": 1,
+    "full_width": false,
+    "uses_background_image": false,
+    "approx_height_px": {
+      "desktop": 160,
+      "mobile": 220
+    },
+    "space_weight": "s"
+  },
+  "constraints": [
+    "requires_headline_or_paragraphs",
+    "cta_url_required_if_cta_label_set"
+  ],
+  "exclusion_criteria": [
+    "Nicht als Ersatz für INTRO_TEXT_01 am Anfang verwenden."
+  ],
+  "compatibility": {
+    "recommended_after": [
+      "DIVIDER_01",
+      "INTRO_TEXT_01"
+    ],
+    "recommended_before": [
+      "IMAGE_GRID_01",
+      "PRODUCT_GRID_01"
+    ],
+    "avoid_adjacent": [
+      "TEXT_BLOCK_01"
+    ],
+    "hard_dependencies": []
+  },
+  "ai_hints": {
+    "when_to_use": "Wenn eine zweite Kollektion/ein Thema nach einem Trenner eingeleitet wird, oder für Gutschein-/Aktionshinweise.",
+    "when_not_to_use": "Für lange Fließtexte (> 900 Zeichen) – lieber EDITORIAL_CARD_01.",
+    "content_guidelines": "Überschrift ohne Versalien, max. 1 Zeile."
+  }
+}

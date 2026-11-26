@@ -1,0 +1,13 @@
+{{!-- HEADER_01 · Logo links, Shop-Link rechts, Primärfarben-Balken über volle Breite --}}
+<mj-section full-width="full-width" background-color="{{t.color.primary}}" padding="0 {{t.layout.section_padding_x}}px" css-class="nl-header">
+  <mj-group>
+    <mj-column width="40%" vertical-align="middle" padding="10px">
+      <mj-image src="{{asset d.logo.url}}" alt="{{d.logo.alt}}" width="{{d.logo.width}}px" align="left" padding="0 0 0 12px"{{#if d.logo_link_url}} href="{{link d.logo_link_url}}"{{/if}} />
+    </mj-column>
+    <mj-column width="60%" vertical-align="middle" padding="10px">
+      <mj-text align="right" css-class="nl-header-link" font-family="{{t.font.accent_family}}" font-size="{{t.type.header_link.size}}" line-height="{{t.type.header_link.line_height}}" color="{{t.color.text_inverse}}">
+        <a href="{{link d.link_url}}" style="color:{{t.color.text_inverse}};text-decoration:none;">{{d.link_label}}{{arrow}}</a>
+      </mj-text>
+    </mj-column>
+  </mj-group>
+</mj-section>

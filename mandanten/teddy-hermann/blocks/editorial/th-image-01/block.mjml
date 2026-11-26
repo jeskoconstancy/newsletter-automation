@@ -1,0 +1,6 @@
+{{!-- TH_IMAGE_01 · Einzelbild zentriert mit frei wählbarer Breite (z. B. Gutscheinmotiv 300px, last_minute), optional verlinkt. --}}
+<mj-section padding="{{spacing d.spacing_top}}px {{t.layout.section_padding_x}}px {{spacing d.spacing_bottom}}px" css-class="th-image">
+  <mj-column padding="{{t.layout.column_padding}}px">
+    <mj-image src="{{asset d.image.url}}" alt="{{d.image.alt}}" title="{{d.image.alt}}" width="{{d.width}}px" align="center"{{#if d.link_url}} href="{{link d.link_url}}"{{/if}} />
+  </mj-column>
+</mj-section>

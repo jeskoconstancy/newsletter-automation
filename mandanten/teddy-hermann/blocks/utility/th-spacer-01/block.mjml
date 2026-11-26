@@ -1,0 +1,6 @@
+{{!-- TH_SPACER_01 · Vertikaler Leerraum auf weißer Inhaltsfläche --}}
+<mj-section padding="0">
+  <mj-column>
+    <mj-spacer height="{{d.height}}px" />
+  </mj-column>
+</mj-section>

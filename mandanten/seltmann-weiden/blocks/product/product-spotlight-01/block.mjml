@@ -1,0 +1,19 @@
+{{!-- PRODUCT_SPOTLIGHT_01 · Einzelnes Produkt: Produktbild + weiße Karte mit Badge, Name, Beschreibung, Preis/Streichpreis und Button.
+     ABGELEITET (keine direkte Referenz): kombiniert die Textkarte (EDITORIAL_CARD_01) mit Produktdaten aus dem Feed.
+     image_side=right wird über direction="rtl" umgesetzt; mobil steht das Bild immer oben. --}}
+<mj-section background-color="{{t.color.page_background}}" padding="0 {{t.layout.section_padding_x}}px {{spacing d.spacing_bottom}}px"{{#if (eq d.image_side "right")}} direction="rtl"{{/if}}>
+  <mj-column width="50%" padding="10px 0 10px 10px" vertical-align="middle">
+    <mj-image src="{{asset d.product.image.url}}" alt="{{d.product.image.alt}}" href="{{link d.product.product_url}}" padding="0" fluid-on-mobile="true" />
+  </mj-column>
+  <mj-column width="50%" padding="10px 10px 10px 0" vertical-align="middle" background-color="{{t.color.page_background}}" inner-background-color="{{t.color.surface}}">
+    <mj-text padding="26px 30px 0" align="left">
+      {{#if d.product.badge}}<p style="margin:0 0 12px;"><span style="display:inline-block;background-color:{{t.color.headline_highlight}};color:{{t.color.text_inverse}};font-size:12px;line-height:18px;font-weight:700;padding:1px 6px;text-transform:uppercase;">{{d.product.badge}}</span></p>{{/if}}
+      <div class="nl-card-heading"><div style="font-size:{{t.type.card_heading.size}};line-height:{{t.type.card_heading.line_height}};font-weight:700;color:{{t.color.heading_accent}};{{#if d.uppercase}}text-transform:uppercase;{{/if}}">{{d.product.name}}</div></div>
+      {{#if d.product.description}}<p style="margin:16px 0 0;">{{rt d.product.description}}</p>{{/if}}
+      <p style="margin:16px 0 0;line-height:{{t.type.product_price.line_height}};">{{#if d.product.price_prefix}}<span style="font-size:13px;">{{d.product.price_prefix}} </span>{{/if}}<span style="font-size:22px;font-weight:700;color:{{t.color.heading_accent}};">{{price d.product.price d.product.currency}}{{#if d.show_price_asterisk}}*{{/if}}</span>{{#if d.product.old_price}} <span class="nl-strike" style="font-size:{{t.type.product_old_price.size}};color:{{t.type.product_old_price.color}};text-decoration:line-through;">{{price d.product.old_price d.product.currency}}</span>{{/if}}</p>
+    </mj-text>
+    <mj-spacer height="20px" />
+    {{> button label=d.cta_label url=d.product.product_url align="left" padding="0 30px"}}
+    <mj-spacer height="28px" />
+  </mj-column>
+</mj-section>

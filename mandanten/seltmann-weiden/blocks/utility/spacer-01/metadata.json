@@ -1,0 +1,73 @@
+{
+  "id": "SPACER_01",
+  "brand": "seltmann-weiden",
+  "name": "Abstandshalter",
+  "version": "1.0.0",
+  "category": "utility",
+  "status": "stable",
+  "purpose": "Zusätzlicher vertikaler Leerraum, wenn kein Trenner gewünscht ist.",
+  "description": "Leerfläche in Seitenhintergrundfarbe, 10–120px.",
+  "use_cases": [
+    "spacing"
+  ],
+  "campaign_types": [
+    "collection_spotlight",
+    "sale",
+    "seasonal_campaign",
+    "product_launch",
+    "new_arrivals",
+    "gift_guide",
+    "voucher",
+    "black_week",
+    "brand_story",
+    "product_recommendations"
+  ],
+  "position": {
+    "slot": "body",
+    "unique": false,
+    "max_per_newsletter": 4
+  },
+  "fields": {
+    "height": {
+      "type": "integer",
+      "required": false,
+      "description": "Höhe in px.",
+      "source": "static_default",
+      "default": 40,
+      "validation": {
+        "min": 10,
+        "max": 120
+      }
+    }
+  },
+  "image_requirements": [],
+  "layout": {
+    "desktop_columns": 1,
+    "mobile_columns": 1,
+    "full_width": false,
+    "uses_background_image": false,
+    "approx_height_px": {
+      "desktop": 40,
+      "mobile": 40
+    },
+    "space_weight": "xs"
+  },
+  "constraints": [
+    "use_sparingly"
+  ],
+  "exclusion_criteria": [],
+  "compatibility": {
+    "recommended_after": [],
+    "recommended_before": [],
+    "avoid_adjacent": [
+      "SPACER_01",
+      "DIVIDER_01"
+    ],
+    "hard_dependencies": []
+  },
+  "ai_hints": {
+    "when_to_use": "Nur wenn ein Baustein ohne Trenner zu dicht folgt (z. B. zwei Produktblöcke).",
+    "when_not_to_use": "Standardmäßig nicht nötig.",
+    "content_guidelines": "–"
+  }
+}

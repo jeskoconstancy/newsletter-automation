@@ -1,0 +1,253 @@
+{
+  "_info": "Mandanten-Konfiguration Seltmann Weiden. Werte aus den Referenz-Previews rekonstruiert. Wird vom n8n-Node 'Mandant aufbereiten' gelesen.",
+  "lang": "de-DE",
+  "feed_url": "https://www.seltmann-shop.de/google_base_feeds/seltmann_google_feed.csv",
+  "allowed_image_domain": "seltmann-shop.de",
+  "product_name_max": 60,
+  "images_with_text_ok": false,
+  "utm": {
+    "enabled": true,
+    "source": "newsletter",
+    "medium": "email"
+  },
+  "shop": {
+    "id": "seltmann-weiden",
+    "name": "Seltmann Weiden",
+    "logo": {
+      "url": "https://www.seltmann-shop.de/static/version1794549865/frontend/Hyva/SeltmannB2C/de_DE/images/logo.svg",
+      "alt": "Seltmann Weiden",
+      "width": 124
+    },
+    "urls": {
+      "shop": "https://www.seltmann-shop.de/",
+      "website_display": "www.seltmann-shop.de"
+    },
+    "header": {
+      "link_label": "Online-Shop",
+      "link_url": "https://www.seltmann-shop.de/"
+    },
+    "salutation_default": "Liebe Kundinnen und Kunden,",
+    "contact": {
+      "phone": "+49 (0) 3641 - 31 61 212",
+      "email": "service@seltmann-shop.de"
+    },
+    "social": [],
+    "_social_format": "{ \"network\": \"instagram\", \"label\": \"Instagram\", \"url\": \"https://…\", \"icon_url\": \"https://…/instagram-64.png\" } – nur Einträge mit url werden angezeigt",
+    "legal": {
+      "subscription_reason": "Sie erhalten diese E-Mail, weil Sie in unserem Shop den Newsletter abonniert haben.",
+      "unsubscribe_sentence": "Wenn Sie den Newsletter nicht mehr erhalten wollen, klicken Sie {{link}} um das Abonnement abzubestellen.",
+      "unsubscribe_link_label": "HIER",
+      "copyright_holder": "Seltmann-Shop",
+      "operator": "Betreibergesellschaft: constancy GmbH / August-Bebel-Str. 27b / 07743 Jena",
+      "rights": "All rights reserved.",
+      "price_note": "* Inkl. deutscher MwSt. (andere Versandländer können abweichen) zzgl. Versand."
+    },
+    "esp": {
+      "name": "rapidmail",
+      "unsubscribe_url": "{%link_unsubscribe}"
+    }
+  },
+  "tokens": {
+    "color": {
+      "primary": "#004799",
+      "page_background": "#f2f2f6",
+      "surface": "#ffffff",
+      "text": "#000000",
+      "text_inverse": "#ffffff",
+      "heading_accent": "#004799",
+      "headline_highlight": "#004799",
+      "divider": "#004799",
+      "footer_rule": "#5a86c4"
+    },
+    "font": {
+      "base_family": "'Work Sans', Arial, Helvetica, sans-serif",
+      "accent_family": "'Poppins', Arial, Helvetica, sans-serif",
+      "webfont_name": "Work Sans",
+      "webfont_url": "https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Work+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    },
+    "type": {
+      "base": {
+        "size": "15px",
+        "line_height": "22px"
+      },
+      "header_link": {
+        "size": "14px",
+        "line_height": "22px"
+      },
+      "hero_m": {
+        "size": "25px",
+        "line_height": "35px",
+        "transform": "uppercase"
+      },
+      "hero_l": {
+        "size": "36px",
+        "line_height": "45px"
+      },
+      "hero_xl": {
+        "size": "46px",
+        "line_height": "56px",
+        "transform": "uppercase"
+      },
+      "section_heading": {
+        "size": "26px",
+        "line_height": "35px"
+      },
+      "card_heading": {
+        "size": "25px",
+        "line_height": "35px"
+      },
+      "product_name": {
+        "size": "15px",
+        "line_height": "20px"
+      },
+      "product_price": {
+        "size": "18px",
+        "line_height": "24px"
+      },
+      "product_old_price": {
+        "size": "13px",
+        "color": "#6b6b76"
+      },
+      "footer": {
+        "size": "12px",
+        "line_height": "18px"
+      }
+    },
+    "layout": {
+      "body_width": 740,
+      "breakpoint": 580,
+      "section_padding_x": 10,
+      "intro_padding_top": 46,
+      "button_padding_bottom": 30,
+      "card_image_overlap": 300,
+      "card_width_percent": 76
+    },
+    "component": {
+      "divider": {
+        "width": "2px",
+        "style": "solid"
+      },
+      "button": {
+        "font_size": "15px",
+        "line_height": "22px",
+        "inner_padding": "8px 22px",
+        "border_radius": "0px"
+      }
+    },
+    "image": {
+      "social_icon_size": 32
+    },
+    "unsubscribe_link": {
+      "color": "#ffffff",
+      "weight": 700
+    },
+    "spacing": {
+      "none": 0,
+      "s": 20,
+      "m": 30,
+      "l": 50
+    },
+    "divider_spacing": {
+      "s": 50,
+      "m": 60,
+      "l": 80
+    },
+    "hero_padding": {
+      "compact": 145,
+      "medium": 275,
+      "tall": 450
+    },
+    "tile_width": {
+      "1": 700,
+      "2": 340,
+      "3": 220
+    },
+    "col_width": {
+      "1": "100%",
+      "2": "50%",
+      "3": "33.33%",
+      "4": "25%"
+    }
+  },
+  "partials": {
+    "button": "<mj-button href=\"{{link url}}\" align=\"{{fallback align \"center\"}}\" padding=\"{{fallback padding \"0\"}}\" background-color=\"{{t.color.primary}}\" color=\"{{t.color.text_inverse}}\" border=\"1px solid {{t.color.primary}}\" border-radius=\"{{t.component.button.border_radius}}\" font-family=\"{{t.font.base_family}}\" font-size=\"{{t.component.button.font_size}}\" font-weight=\"700\" line-height=\"{{t.component.button.line_height}}\" inner-padding=\"{{t.component.button.inner_padding}}\">{{label}}{{arrow}}</mj-button>",
+    "text-link": "<a href=\"{{link url}}\" style=\"color:{{t.color.heading_accent}};font-weight:700;text-decoration:none;\">{{label}}{{arrow}}</a>"
+  },
+  "mj_attributes": "",
+  "css": "a { text-decoration: none; }\np { margin: 0; }\nh1, h2, h3 { margin: 0; padding: 0; }\n.nl-hl { -webkit-box-decoration-break: clone; box-decoration-break: clone; }\n.nl-strike { text-decoration: line-through; }\n@media only screen and (max-width: 580px) {\n  .nl-hero-h1-m { font-size: 20px !important; line-height: 28px !important; }\n  .nl-hero-h1-l { font-size: 26px !important; line-height: 32px !important; }\n  .nl-hero-h1-xl { font-size: 33px !important; line-height: 40px !important; }\n  .nl-hero-text { padding-bottom: 90px !important; }\n  .nl-hero-text.nl-hero-tall { padding-bottom: 220px !important; }\n  .nl-card-media > table > tbody > tr > td,\n  .nl-card-media > div > table > tbody > tr > td { padding-top: 170px !important; }\n  .nl-card-heading div { font-size: 21px !important; line-height: 29px !important; }\n  .nl-section-heading div { font-size: 22px !important; line-height: 30px !important; }\n  .nl-header-link div { font-size: 13px !important; }\n  .nl-hide-mobile { display: none !important; }\n}",
+  "prompt": {
+    "branche": "Porzellan",
+    "vision_rules": "",
+    "rules": [
+      "HERO_01 nur mit einem Bild, dessen usage \"hero\" enthält, contains_text=false und quiet_area top_left/top/left. image_position aus focus_point übernehmen. Fehlt so ein Bild: kein Hero, direkt INTRO_TEXT_01. headline_style \"highlight\" bei unruhigem/hellem Bild, \"plain\" bei ruhigem/dunklem Bereich. Hero-Headline ≤ 55 Zeichen.",
+      "EDITORIAL_CARD_01 braucht ein Bild mit usage \"editorial_card\" (Motiv oben). IMAGE_GRID_01: Anzahl Bilder = Vielfaches von columns, Bilder mit gleichem Seitenverhältnis wählen und aspect_ratio passend setzen (1:1, 2:3, 3:4, 3:2, 16:9, 6:5).",
+      "Produkte: PRODUCT_GRID_01 mit genau 2, 3 oder 4 Produkten bzw. PRODUCT_SPOTLIGHT_01 mit einem Produkt.",
+      "Texte: Deutsch, Sie-Ansprache, warm und hochwertig wie in den Referenzen. KEINE Anrede setzen (greeting weglassen – kommt automatisch). Der erste Intro-Absatz beginnt klein, weil er an „Liebe Kundinnen und Kunden,“ anschließt. Kollektionsnamen und Rabatte mit <strong>. Kein Pfeil „➞“ in Texten (kommt automatisch). Keine Emojis."
+    ],
+    "style_example": "Referenz-Newsletter „Beat Color Glaze“ – Hero: \"Beat Color Glaze\\nzum Sonderpreis\" · Intro: \"Wer modernes Geschirr mit besonderem Charakter mag, sollte jetzt einen Blick auf <strong>Beat Color Glaze</strong> werfen. Die Kollektion ist aktuell im Angebot und bringt Farbe, Struktur und eine angenehme Leichtigkeit auf den gedeckten Tisch.\" · Karte: Headline \"Farbe trifft Struktur\", Absatz \"Beat Color Glaze verbindet moderne Formen mit einer besonderen, handwerklich anmutenden Reliefstruktur. …\"",
+    "image_exclude_patterns": []
+  },
+  "composition": {
+    "_info": "Freie Kombination zwischen Header und Footer. Harte Regeln werden im Node 'Newsletter rendern' geprüft (Fehler → automatische Korrekturrunde). examples = Anregungen für die KI, je Lauf wird eins zufällig als Ausgangspunkt vorgeschlagen.",
+    "content_blocks": {
+      "min": 3,
+      "max": 7,
+      "not_counted": [
+        "DIVIDER_01",
+        "SPACER_01"
+      ]
+    },
+    "max_per_block": 2,
+    "no_direct_repeat": true,
+    "hero_blocks": [
+      "HERO_01"
+    ],
+    "intro_blocks": [
+      "INTRO_TEXT_01"
+    ],
+    "role_capable": {
+      "intro": [],
+      "fazit": [
+        "TEXT_BLOCK_01",
+        "CTA_BUTTON_01"
+      ]
+    },
+    "rules": [
+      "INTRO_TEXT_01 ist immer die Einleitung (ohne role) und enthält die Anrede automatisch – also nur am Anfang verwenden.",
+      "Der Hero unten (Schlussbild) eignet sich für einen emotionalen Abschluss mit Claim; dann vorher ein Fazit mit Handlungsaufforderung.",
+      "Zwei Hintergrundbild-Bausteine (HERO_01, EDITORIAL_CARD_01) nicht direkt nacheinander."
+    ],
+    "examples": [
+      {
+        "name": "Kollektion klassisch",
+        "blocks": "HERO_01 → INTRO_TEXT_01 → IMAGE_GRID_01 → DIVIDER_01 → EDITORIAL_CARD_01 → DIVIDER_01 → TEXT_BLOCK_01 (fazit)",
+        "when": "Kollektion vorstellen, viele Stimmungsbilder"
+      },
+      {
+        "name": "Sale mit Produkten",
+        "blocks": "HERO_01 → INTRO_TEXT_01 → PRODUCT_GRID_01 → EDITORIAL_CARD_01 → PRODUCT_SPOTLIGHT_01 → CTA_BUTTON_01 (fazit)",
+        "when": "Rabattaktion, Produkte mit Preisen"
+      },
+      {
+        "name": "Story mit Schlussbild",
+        "blocks": "INTRO_TEXT_01 → EDITORIAL_CARD_01 → IMAGE_GRID_01 → TEXT_BLOCK_01 (fazit) → HERO_01",
+        "when": "Marke/Story, saisonale Stimmung"
+      },
+      {
+        "name": "Produkt-Fokus",
+        "blocks": "HERO_01 → PRODUCT_SPOTLIGHT_01 → DIVIDER_01 → IMAGE_GRID_01 → PRODUCT_GRID_01 → CTA_BUTTON_01 (fazit)",
+        "when": "Neuheit/Produktlaunch mit einem Hauptprodukt"
+      },
+      {
+        "name": "Kompakt",
+        "blocks": "HERO_01 → INTRO_TEXT_01 → EDITORIAL_CARD_01 → CTA_BUTTON_01 (fazit)",
+        "when": "kurze Erinnerung, wenig Bildmaterial"
+      },
+      {
+        "name": "Zwei Kollektionen",
+        "blocks": "HERO_01 → INTRO_TEXT_01 → EDITORIAL_CARD_01 → IMAGE_GRID_01 → EDITORIAL_CARD_01 → IMAGE_GRID_01 → TEXT_BLOCK_01 (fazit)",
+        "when": "zwei Serien oder Themen in einem Newsletter"
+      }
+    ]
+  }
+}

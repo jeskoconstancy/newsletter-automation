@@ -1,0 +1,6 @@
+{{!-- DIVIDER_01 · 2px Linie in Primärfarbe über die Textbreite (700px), Abstand oben/unten 50/60/80px --}}
+<mj-section background-color="{{t.color.page_background}}" padding="0 {{t.layout.section_padding_x}}px">
+  <mj-column>
+    <mj-divider border-color="{{t.color.divider}}" border-width="{{t.component.divider.width}}" border-style="{{t.component.divider.style}}" padding="{{dividerSpacing d.spacing}}px 10px" />
+  </mj-column>
+</mj-section>

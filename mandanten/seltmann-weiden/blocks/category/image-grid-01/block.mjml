@@ -1,0 +1,29 @@
+{{!-- IMAGE_GRID_01 · 1–3 verlinkte Bildkacheln pro Reihe (max. 2 Reihen), optional mit zentrierter Zwischenüberschrift und Button.
+     Kachelbreiten wie in den Referenzen: 3 Spalten = 220px, 2 Spalten = 340px, 1 Spalte = 700px (20px Gutter). --}}
+{{#if d.headline}}
+<mj-section background-color="{{t.color.page_background}}" padding="0 {{t.layout.section_padding_x}}px 10px">
+  <mj-column padding="10px">
+    <mj-text align="center" css-class="nl-section-heading">
+      <div style="font-size:{{t.type.section_heading.size}};line-height:{{t.type.section_heading.line_height}};font-weight:700;color:{{t.color.heading_accent}};">{{d.headline}}</div>
+    </mj-text>
+  </mj-column>
+</mj-section>
+{{/if}}
+{{#each (chunk d.images d.columns)}}
+<mj-section background-color="{{../t.color.page_background}}" padding="0 {{../t.layout.section_padding_x}}px">
+  {{#unless ../d.mobile_stack}}<mj-group>{{/unless}}
+  {{#each this}}
+    <mj-column width="{{colWidth ../../d.columns}}" padding="10px">
+      <mj-image src="{{asset image.url}}" alt="{{image.alt}}"{{#if link_url}} href="{{link link_url}}"{{/if}} width="{{tileWidth ../../d.columns}}px" padding="0"{{#if ../../d.mobile_stack}} fluid-on-mobile="true"{{/if}} />
+    </mj-column>
+  {{/each}}
+  {{#unless ../d.mobile_stack}}</mj-group>{{/unless}}
+</mj-section>
+{{/each}}
+{{#if d.cta_url}}
+<mj-section background-color="{{t.color.page_background}}" padding="20px {{t.layout.section_padding_x}}px 0">
+  <mj-column padding="10px">
+    {{> button label=d.cta_label url=d.cta_url align="center"}}
+  </mj-column>
+</mj-section>
+{{/if}}

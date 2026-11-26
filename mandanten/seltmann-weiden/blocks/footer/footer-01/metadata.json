@@ -1,0 +1,250 @@
+{
+  "id": "FOOTER_01",
+  "brand": "seltmann-weiden",
+  "name": "Footer – Social, Kontakt, Abmeldung, Rechtliches",
+  "version": "1.0.0",
+  "category": "footer",
+  "status": "stable",
+  "purpose": "Pflichtangaben, Abmeldemöglichkeit, Kontakt und Social-Media-Links.",
+  "description": "Vollbreite Fläche in Primärfarbe: 5 Social-Icons (32px, Outline, weiß), kurze helle Linie, Kontaktzeile, Abo-Hinweis mit Abmeldelink ('HIER'), Copyright + Betreibergesellschaft, Preishinweis (* inkl. MwSt.). Weiß, 12/18px, zentriert. In 9/9 Referenzen identisch.",
+  "use_cases": [
+    "legal_footer",
+    "unsubscribe",
+    "social_links",
+    "contact"
+  ],
+  "campaign_types": [
+    "collection_spotlight",
+    "sale",
+    "seasonal_campaign",
+    "product_launch",
+    "new_arrivals",
+    "gift_guide",
+    "voucher",
+    "black_week",
+    "brand_story",
+    "product_recommendations"
+  ],
+  "position": {
+    "slot": "last",
+    "unique": true,
+    "max_per_newsletter": 1
+  },
+  "fields": {
+    "social": {
+      "type": "array",
+      "required": false,
+      "description": "Social-Links aus dem Shop-Profil. Nur Einträge mit URL werden angezeigt.",
+      "source": "shop_profile",
+      "default_from": "shop.social",
+      "validation": {
+        "max_items": 6
+      },
+      "item_fields": {
+        "network": {
+          "type": "string",
+          "required": true,
+          "description": "Netzwerk-Kennung.",
+          "source": "shop_profile"
+        },
+        "label": {
+          "type": "string",
+          "required": true,
+          "description": "Name/Alt-Text.",
+          "source": "shop_profile"
+        },
+        "url": {
+          "type": "url",
+          "required": false,
+          "description": "Profil-URL. Leer = Icon wird ausgeblendet. Pflege in mandant.json › shop.social[].url.",
+          "source": "shop_profile",
+          "validation": {
+            "https_only": true
+          }
+        },
+        "icon_url": {
+          "type": "url",
+          "required": true,
+          "description": "Icon (32px Anzeige, 64px Datei, hell).",
+          "source": "shop_profile",
+          "validation": {
+            "https_only": true
+          }
+        },
+        "preview_icon_url": {
+          "type": "string",
+          "required": false,
+          "description": "Lokales Icon für Vorschau.",
+          "source": "shop_profile"
+        }
+      }
+    },
+    "show_social": {
+      "type": "boolean",
+      "required": false,
+      "description": "Social-Leiste anzeigen.",
+      "source": "static_default",
+      "default": true
+    },
+    "contact": {
+      "type": "object",
+      "required": true,
+      "description": "Telefon und E-Mail.",
+      "source": "shop_profile",
+      "default_from": "shop.contact",
+      "fields": {
+        "phone": {
+          "type": "string",
+          "required": true,
+          "description": "Telefon.",
+          "source": "shop_profile"
+        },
+        "email": {
+          "type": "string",
+          "required": true,
+          "description": "E-Mail.",
+          "source": "shop_profile",
+          "validation": {
+            "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+          }
+        }
+      }
+    },
+    "shop_url": {
+      "type": "url",
+      "required": true,
+      "description": "Shop-URL.",
+      "source": "shop_profile",
+      "default_from": "shop.urls.shop",
+      "validation": {
+        "https_only": true
+      }
+    },
+    "website_display": {
+      "type": "string",
+      "required": true,
+      "description": "Angezeigte Web-Adresse.",
+      "source": "shop_profile",
+      "default_from": "shop.urls.website_display"
+    },
+    "legal": {
+      "type": "object",
+      "required": true,
+      "description": "Rechtstexte.",
+      "source": "shop_profile",
+      "default_from": "shop.legal",
+      "fields": {
+        "subscription_reason": {
+          "type": "string",
+          "required": true,
+          "description": "Grund des Erhalts.",
+          "source": "shop_profile"
+        },
+        "unsubscribe_sentence": {
+          "type": "string",
+          "required": true,
+          "description": "Satz mit {{link}}-Platzhalter für den Abmeldelink.",
+          "source": "shop_profile",
+          "validation": {
+            "pattern": "\\{\\{link\\}\\}"
+          }
+        },
+        "unsubscribe_link_label": {
+          "type": "string",
+          "required": true,
+          "description": "Linktext.",
+          "source": "shop_profile"
+        },
+        "copyright_holder": {
+          "type": "string",
+          "required": true,
+          "description": "Rechteinhaber.",
+          "source": "shop_profile"
+        },
+        "operator": {
+          "type": "string",
+          "required": true,
+          "description": "Betreibergesellschaft inkl. Anschrift (Impressumspflicht).",
+          "source": "shop_profile",
+          "validation": {
+            "min_length": 10
+          }
+        },
+        "rights": {
+          "type": "string",
+          "required": false,
+          "description": "Rechtevermerk.",
+          "source": "shop_profile"
+        },
+        "price_note": {
+          "type": "string",
+          "required": false,
+          "description": "Preishinweis.",
+          "source": "shop_profile"
+        }
+      }
+    },
+    "unsubscribe_url": {
+      "type": "url_or_merge_tag",
+      "required": true,
+      "description": "Abmeldelink: Rapidmail-Platzhalter {%link_unsubscribe} (aus shop.esp.unsubscribe_url). PFLICHT – ohne Abmeldelink wird nicht gerendert.",
+      "source": "esp",
+      "default_from": "shop.esp.unsubscribe_url"
+    },
+    "show_price_note": {
+      "type": "boolean",
+      "required": false,
+      "description": "Preishinweis anzeigen (Pflicht, wenn Preise im Newsletter).",
+      "source": "static_default",
+      "default": true
+    }
+  },
+  "image_requirements": [
+    {
+      "key": "social_icon",
+      "field": "social[].icon_url",
+      "image_type": "icon",
+      "aspect_ratio": "1:1",
+      "display_width": 32,
+      "min_width": 64,
+      "formats": [
+        "png"
+      ],
+      "alt_required": true,
+      "usage": "Helle Outline-Icons auf Primärfarbe",
+      "rendering": "img"
+    }
+  ],
+  "layout": {
+    "desktop_columns": 1,
+    "mobile_columns": 1,
+    "full_width": true,
+    "uses_background_image": false,
+    "approx_height_px": {
+      "desktop": 290,
+      "mobile": 360
+    },
+    "space_weight": "m"
+  },
+  "constraints": [
+    "must_be_last_block",
+    "exactly_one_per_newsletter",
+    "unsubscribe_url_required",
+    "operator_required",
+    "social_icons_only_with_url"
+  ],
+  "exclusion_criteria": [],
+  "compatibility": {
+    "recommended_after": [
+      "DIVIDER_01"
+    ],
+    "recommended_before": [],
+    "avoid_adjacent": [],
+    "hard_dependencies": []
+  },
+  "ai_hints": {
+    "when_to_use": "Immer als letzter Baustein.",
+    "when_not_to_use": "Nie weglassen.",
+    "content_guidelines": "Keine Daten nötig. show_price_note=true sobald Preise vorkommen."
+  }
+}

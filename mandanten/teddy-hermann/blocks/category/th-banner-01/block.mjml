@@ -1,0 +1,6 @@
+{{!-- TH_BANNER_01 · Zwischenbanner 700px (schmal 700×109 oder hoch 700×255): leitet einen Themenbereich ein, Bildtext eingebrannt, verlinkt. --}}
+<mj-section padding="{{spacing d.spacing_top}}px 0 {{spacing d.spacing_bottom}}px" css-class="th-banner">
+  <mj-column>
+    <mj-image src="{{asset d.image.url}}" alt="{{d.image.alt}}" title="{{d.image.alt}}"{{#if d.link_url}} href="{{link d.link_url}}"{{/if}} width="{{t.layout.content_width}}px" align="center" />
+  </mj-column>
+</mj-section>

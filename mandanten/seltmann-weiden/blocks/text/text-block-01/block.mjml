@@ -1,0 +1,26 @@
+{{!-- TEXT_BLOCK_01 · Optionale Zwischenüberschrift + Fließtext + optionaler Button oder Textlink.
+     Deckt ab: zentrierte Zwischenüberschrift (blackweek), zentrierter Hinweistext (lastminutegeschenk), Gutschein-/Aktionshinweis. --}}
+<mj-section background-color="{{t.color.page_background}}" padding="{{spacing d.spacing_top}}px {{t.layout.section_padding_x}}px {{#if (and d.cta_url (eq d.cta_style "button"))}}0{{else}}{{spacing d.spacing_bottom}}{{/if}}px">
+  <mj-column padding="10px">
+    {{#if d.headline}}
+    <mj-text align="{{d.align}}" css-class="nl-section-heading" padding="0 0 {{#if d.paragraphs}}16px{{else}}0{{/if}}">
+      <div style="font-size:{{t.type.section_heading.size}};line-height:{{t.type.section_heading.line_height}};font-weight:700;color:{{t.color.heading_accent}};">{{d.headline}}</div>
+    </mj-text>
+    {{/if}}
+    {{#if d.paragraphs}}
+    <mj-text align="{{d.align}}">
+      {{#each d.paragraphs}}<p style="margin:0{{#unless @last}} 0 22px{{/unless}};">{{rt this}}</p>{{/each}}
+    </mj-text>
+    {{/if}}
+    {{#if (and d.cta_url (eq d.cta_style "link"))}}
+    <mj-text align="{{d.align}}" padding="{{#if (or d.headline d.paragraphs)}}22px{{else}}0{{/if}} 0 0">{{> text-link label=d.cta_label url=d.cta_url}}</mj-text>
+    {{/if}}
+  </mj-column>
+</mj-section>
+{{#if (and d.cta_url (eq d.cta_style "button"))}}
+<mj-section background-color="{{t.color.page_background}}" padding="20px {{t.layout.section_padding_x}}px {{spacing d.spacing_bottom}}px">
+  <mj-column padding="10px">
+    {{> button label=d.cta_label url=d.cta_url align="center"}}
+  </mj-column>
+</mj-section>
+{{/if}}

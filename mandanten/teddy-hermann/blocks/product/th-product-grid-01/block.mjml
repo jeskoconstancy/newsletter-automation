@@ -1,0 +1,22 @@
+{{!-- TH_PRODUCT_GRID_01 · 2/3/4 Produkte je Reihe (max. 2 Reihen): Freisteller quadratisch, Name, Zusatzzeile (Größe), optional Streichpreis + Aktionspreis.
+     4 Spalten = 2 mj-groups à 2 Spalten → mobil 2×2 statt 4 winziger Spalten. 3 Spalten stapeln mobil. --}}
+{{#if d.headline}}
+<mj-section padding="{{spacing d.spacing_top}}px {{t.layout.section_padding_x}}px 0">
+  <mj-column padding="{{t.layout.column_padding}}px">
+    <mj-text align="center" css-class="th-headline"><h2 style="margin:0;font-size:{{t.type.headline.size}};line-height:{{t.type.headline.line_height}};font-weight:{{t.type.headline.weight}};color:{{#if (eq d.headline_color "dark")}}{{t.color.heading_alt}}{{else}}{{t.color.heading}}{{/if}};">{{d.headline}}</h2></mj-text>
+  </mj-column>
+</mj-section>
+{{/if}}
+{{#each (chunk d.products d.columns)}}
+<mj-section padding="{{#if (and @first (not ../d.headline))}}{{spacing ../d.spacing_top}}{{else}}0{{/if}}px {{../t.layout.section_padding_x}}px {{#if @last}}{{spacing ../d.spacing_bottom}}{{else}}0{{/if}}px" css-class="th-product-grid">
+  {{#if (eq ../d.columns 3)}}
+    {{#each this}}<mj-column width="33.33%" padding="{{../../t.layout.column_padding}}px" vertical-align="top">{{> th-product-cell p=this t=../../t d=../../d img=200}}</mj-column>
+    {{/each}}
+  {{else}}
+    {{#each (chunk this 2)}}<mj-group width="{{#if (eq ../../d.columns 4)}}50%{{else}}100%{{/if}}">
+      {{#each this}}<mj-column width="50%" padding="{{../../../t.layout.column_padding}}px" vertical-align="top">{{> th-product-cell p=this t=../../../t d=../../../d img=(pick ../../../d.columns "4=150|2=220" 220)}}</mj-column>
+      {{/each}}
+    </mj-group>{{/each}}
+  {{/if}}
+</mj-section>
+{{/each}}

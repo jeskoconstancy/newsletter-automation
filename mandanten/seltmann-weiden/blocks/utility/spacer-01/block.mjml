@@ -1,0 +1,6 @@
+{{!-- SPACER_01 · Vertikaler Leerraum auf Seitenhintergrund --}}
+<mj-section background-color="{{t.color.page_background}}" padding="0">
+  <mj-column>
+    <mj-spacer height="{{d.height}}px" />
+  </mj-column>
+</mj-section>

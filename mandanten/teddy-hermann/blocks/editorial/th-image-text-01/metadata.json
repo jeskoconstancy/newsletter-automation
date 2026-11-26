@@ -1,0 +1,352 @@
+{
+  "id": "TH_IMAGE_TEXT_01",
+  "brand": "teddy-hermann",
+  "name": "Bild-Text-Modul – Produkt/Thema mit Beschreibung",
+  "version": "1.0.0",
+  "category": "editorial",
+  "status": "stable",
+  "purpose": "Ein Produkt, eine Produktgruppe oder ein Gewinnspiel mit Bild und erklärendem Text vorstellen.",
+  "description": "Zwei Spalten: Bild (30/40/50 %) links oder rechts, daneben Headline (rot/dunkelgrau, fett oder normal), Fließtext im Blocksatz und optional Kleingedrucktes. Button zentriert unter dem Modul (6/9) oder in der Textspalte (3/9). Mobil: Bild oben, Text darunter.",
+  "use_cases": [
+    "product_feature",
+    "category_teaser",
+    "contest_description",
+    "new_arrivals"
+  ],
+  "campaign_types": [
+    "seasonal_campaign",
+    "sale",
+    "voucher",
+    "gift_guide",
+    "new_arrivals",
+    "product_launch",
+    "collection_spotlight",
+    "contest",
+    "free_gift",
+    "free_shipping",
+    "product_recommendations",
+    "brand_story"
+  ],
+  "position": {
+    "slot": "body",
+    "unique": false,
+    "max_per_newsletter": 4
+  },
+  "fields": {
+    "image": {
+      "type": "image",
+      "required": true,
+      "description": "Produkt-Freisteller (weißer Hintergrund) oder Motivbild.",
+      "source": "asset_pipeline",
+      "validation": {
+        "image_requirement": "side_image"
+      },
+      "fields": {
+        "url": {
+          "type": "url",
+          "required": true,
+          "description": "Absolute HTTPS-URL (Rapidmail-Medienarchiv c.emailsys1a.net oder teddy-hermann-shop.de; im Vorschaumodus auch relativ).",
+          "source": "asset_pipeline",
+          "validation": {
+            "https_only": true
+          }
+        },
+        "alt": {
+          "type": "string",
+          "required": true,
+          "description": "Alternativtext. Bei Bildern mit eingebranntem Text MUSS der Bildtext enthalten sein (wird bei blockierten Bildern angezeigt).",
+          "source": "ai_agent",
+          "validation": {
+            "min_length": 3,
+            "max_length": 140
+          }
+        },
+        "width": {
+          "type": "integer",
+          "required": false,
+          "description": "Pixelbreite der Originaldatei – nötig für Verhältnis-/Auflösungsprüfung.",
+          "source": "asset_pipeline",
+          "validation": {
+            "min": 1
+          }
+        },
+        "height": {
+          "type": "integer",
+          "required": false,
+          "description": "Pixelhöhe der Originaldatei.",
+          "source": "asset_pipeline",
+          "validation": {
+            "min": 1
+          }
+        },
+        "asset_id": {
+          "type": "string",
+          "required": false,
+          "description": "Referenz im Bildreferenz-Format (registry/asset-reference-schema.json).",
+          "source": "asset_pipeline"
+        },
+        "rights_status": {
+          "type": "enum",
+          "required": false,
+          "description": "Nutzungsfreigabe des Bildes.",
+          "source": "asset_pipeline",
+          "values": [
+            "approved",
+            "pending",
+            "unknown",
+            "rejected"
+          ],
+          "default": "unknown"
+        }
+      }
+    },
+    "image_link_url": {
+      "type": "url",
+      "required": false,
+      "description": "Link des Bildes (Standard: cta_url).",
+      "source": "campaign_brief",
+      "validation": {
+        "https_only": true
+      }
+    },
+    "image_side": {
+      "type": "enum",
+      "required": false,
+      "description": "Bildposition auf Desktop. Bei mehreren Modulen abwechseln (geschenke_valentin, osternest).",
+      "source": "ai_agent",
+      "values": [
+        "left",
+        "right"
+      ],
+      "default": "left"
+    },
+    "image_width": {
+      "type": "enum",
+      "required": false,
+      "description": "Bildspalte in %: 40 = Standard (6/9), 30 = kleines Produkt (muttertag), 50 = großes Motiv (osternest).",
+      "source": "ai_agent",
+      "values": [
+        "30",
+        "40",
+        "50"
+      ],
+      "default": "40"
+    },
+    "headline": {
+      "type": "string",
+      "required": false,
+      "description": "Überschrift 20px fett. Zeilenumbruch mit \\n möglich. Höchstens ein Emoji am Ende (biene 🐝, halloween 🍂). Versalien nur, wenn bewusst so geschrieben (valentinstag, sommersuchspiel).",
+      "source": "ai_agent",
+      "validation": {
+        "min_length": 3,
+        "max_length": 80,
+        "recommended_max_length": 60
+      },
+      "example": "Schaurig-süße Kuschelfreunde zu Halloween"
+    },
+    "headline_color": {
+      "type": "enum",
+      "required": false,
+      "description": "accent = Rot #ff0000 (8/10, Standard), dark = Dunkelgrau #545654 (Service-/Gewinnspieltexte: versandkostenfrei, schulstart, muttertag, sommersuchspiel).",
+      "source": "ai_agent",
+      "values": [
+        "accent",
+        "dark"
+      ],
+      "default": "accent"
+    },
+    "headline_weight": {
+      "type": "enum",
+      "required": false,
+      "description": "bold = fett (Standard, 6/9), regular = normal (biene, halloween: dunkelgrau, ruhiger).",
+      "source": "ai_agent",
+      "values": [
+        "bold",
+        "regular"
+      ],
+      "default": "bold"
+    },
+    "paragraphs": {
+      "type": "paragraphs",
+      "required": false,
+      "description": "Absätze. Erlaubt: <strong>, <em>, <br>. Immer Du-Ansprache (du/dein, klein). Aktionsbedingungen nicht hier, sondern in 'note'. Preise/Rabatte mit * kennzeichnen.",
+      "source": "ai_agent",
+      "validation": {
+        "min_items": 1,
+        "max_items": 3,
+        "item_max_length": 600,
+        "total_max_length": 800
+      }
+    },
+    "align": {
+      "type": "enum",
+      "required": false,
+      "description": "justify = Blocksatz (Standard, 7/9), left = linksbündig (sommersuchspiel, halloween).",
+      "source": "ai_agent",
+      "values": [
+        "justify",
+        "left"
+      ],
+      "default": "justify"
+    },
+    "note": {
+      "type": "string",
+      "required": false,
+      "description": "Kleingedrucktes (11px), z. B. '*Die Aktion ist bis zum 14.2.2026 gültig. Nur solange der Vorrat reicht. Nicht mit anderen Rabatten kombinierbar.' Pflicht, wenn im Text ein * auf Bedingungen verweist.",
+      "source": "campaign_brief",
+      "validation": {
+        "max_length": 300
+      }
+    },
+    "cta_label": {
+      "type": "string",
+      "required": false,
+      "description": "Buttontext. Wird in Versalien dargestellt (außer cta_preserve_case). Muster: 'JETZT ENTDECKEN', 'JETZT SPAREN', 'JETZT MITMACHEN', 'ZUM GEWINNSPIEL'. Kein Pfeil.",
+      "source": "ai_agent",
+      "validation": {
+        "min_length": 3,
+        "max_length": 40,
+        "recommended_max_length": 30
+      }
+    },
+    "cta_url": {
+      "type": "url",
+      "required": false,
+      "description": "Ziel des Buttons. Ohne URL kein Button.",
+      "source": "campaign_brief",
+      "validation": {
+        "https_only": true
+      }
+    },
+    "cta_variant": {
+      "type": "enum",
+      "required": false,
+      "description": "primary = rot (Standard, 19/20 Buttons), secondary = dunkelgrau #545654 (versandkostenfrei – für ruhige Service-Aktionen).",
+      "source": "ai_agent",
+      "values": [
+        "primary",
+        "secondary"
+      ],
+      "default": "primary"
+    },
+    "cta_preserve_case": {
+      "type": "boolean",
+      "required": false,
+      "description": "true = Buttontext nicht in Versalien umwandeln (halloween, last_minute: 'Hier geht's zu den Gutscheinen!').",
+      "source": "ai_agent",
+      "default": false
+    },
+    "cta_position": {
+      "type": "enum",
+      "required": false,
+      "description": "below = Button zentriert unter dem Modul (Standard), column = Button in der Textspalte (halloween, osternest, sommersuchspiel).",
+      "source": "ai_agent",
+      "values": [
+        "below",
+        "column"
+      ],
+      "default": "below"
+    },
+    "spacing_top": {
+      "type": "enum",
+      "required": false,
+      "description": "Abstand oben. none = 0, s = 20px, m = 30px, l = 50px.",
+      "source": "static_default",
+      "values": [
+        "none",
+        "s",
+        "m",
+        "l"
+      ],
+      "default": "s"
+    },
+    "spacing_bottom": {
+      "type": "enum",
+      "required": false,
+      "description": "Abstand unten. none = 0, s = 20px, m = 30px, l = 50px.",
+      "source": "static_default",
+      "values": [
+        "none",
+        "s",
+        "m",
+        "l"
+      ],
+      "default": "s"
+    }
+  },
+  "image_requirements": [
+    {
+      "key": "side_image",
+      "field": "image",
+      "image_type": "product",
+      "aspect_ratio": "1:1",
+      "aspect_ratio_alternatives": [
+        "6:5",
+        "5:4",
+        "4:3",
+        "7:3",
+        "1:1.05"
+      ],
+      "display_width": 340,
+      "min_width": 680,
+      "formats": [
+        "jpg",
+        "jpeg",
+        "png"
+      ],
+      "alt_required": true,
+      "crop": "Bild wird proportional in die Spaltenbreite skaliert (kein Zuschnitt)",
+      "focus": "Freisteller auf Weiß bevorzugt (8/11 Referenzmodule)",
+      "usage": "Produktfoto/Freisteller oder Gewinnspiel-Set",
+      "rendering": "img"
+    }
+  ],
+  "layout": {
+    "desktop_columns": 2,
+    "mobile_columns": 1,
+    "full_width": false,
+    "uses_background_image": false,
+    "approx_height_px": {
+      "desktop": 330,
+      "mobile": 620
+    },
+    "space_weight": "l"
+  },
+  "constraints": [
+    "requires_image",
+    "requires_headline_or_paragraphs",
+    "max_one_cta"
+  ],
+  "exclusion_criteria": [
+    "Mehr als 2 Produkte gleichwertig zeigen → TH_PRODUCT_GRID_01."
+  ],
+  "compatibility": {
+    "recommended_after": [
+      "TH_BANNER_01",
+      "TH_TEXT_01",
+      "TH_HERO_01",
+      "TH_DIVIDER_01"
+    ],
+    "recommended_before": [
+      "TH_PRODUCT_GRID_01",
+      "TH_FOOTER_01",
+      "TH_DIVIDER_01"
+    ],
+    "avoid_adjacent": [],
+    "hard_dependencies": []
+  },
+  "ai_hints": {
+    "when_to_use": "Für jedes Thema mit einem starken Einzelbild (Produkt-Neuheit, Gewinnspiel-Set, Themenwelt).",
+    "when_not_to_use": "Ohne Bild → TH_TEXT_01.",
+    "content_guidelines": "Headline konkret ('Süße Kuh Gerda wieder im Sortiment!', 'UNSER GEWINNSPIEL'). 3–6 Sätze, Nutzen + Anlass. Zwei Module hintereinander: image_side abwechseln, optional TH_DIVIDER_01 dazwischen.",
+    "variant_selection": {
+      "contest": {
+        "headline_color": "accent",
+        "cta_label": "Zum Gewinnspiel"
+      },
+      "new_arrivals": {
+        "image_width": "40"
+      }
+    }
+  }
+}

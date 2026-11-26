@@ -1,0 +1,16 @@
+{{!-- INTRO_TEXT_01 · Anrede + Einleitungsabsätze + optionaler Button (Standard direkt unter dem Hero) --}}
+<mj-section background-color="{{t.color.page_background}}" padding="{{t.layout.intro_padding_top}}px {{t.layout.section_padding_x}}px {{#if d.cta_url}}0{{else}}20px{{/if}}">
+  <mj-column padding="10px">
+    <mj-text align="{{d.align}}">
+      {{#if d.greeting}}<p style="margin:0 0 22px;{{#if d.greeting_bold}}font-weight:700;{{/if}}">{{d.greeting}}</p>{{/if}}
+      {{#each d.paragraphs}}<p style="margin:0{{#unless @last}} 0 22px{{/unless}};">{{rt this}}</p>{{/each}}
+    </mj-text>
+  </mj-column>
+</mj-section>
+{{#if d.cta_url}}
+<mj-section background-color="{{t.color.page_background}}" padding="20px {{t.layout.section_padding_x}}px {{t.layout.button_padding_bottom}}px">
+  <mj-column padding="10px">
+    {{> button label=d.cta_label url=d.cta_url align="center"}}
+  </mj-column>
+</mj-section>
+{{/if}}

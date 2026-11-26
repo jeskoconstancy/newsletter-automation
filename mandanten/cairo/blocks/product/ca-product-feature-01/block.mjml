@@ -1,0 +1,16 @@
+{{!-- CA_PRODUCT_FEATURE_01 · Ein Produkt groß und zentriert: Bild 600px (oder 400px), darunter zentriert Modellname, Produktart, UVP, Preis und Button – ohne Farbfläche (z. B. 'Sessel Herby', 'Shining Star'). --}}
+{{#if (spacing d.spacing_top)}}{{> ca-gap h=(spacing d.spacing_top)}}{{/if}}
+{{#with (lookup t.palette (concat d.button_color "_plain"))}}
+<mj-section padding="0" css-class="ca-feature">
+  <mj-column>
+    <mj-image src="{{asset (fallback ../d.image.url ../d.product.image.url)}}" alt="{{fallback ../d.image.alt (fallback ../d.product.image.alt ../d.headline)}}" title="{{../d.headline}}" href="{{link (fallback ../d.product.product_url ../d.link_url)}}" width="{{../d.image_width}}px" align="center" />
+    <mj-text align="center" padding="20px 23px 0" color="#000000" css-class="ca-pad">
+      <div style="font-size:21px;line-height:25px;font-weight:700;"><a href="{{link (fallback ../d.product.product_url ../d.link_url)}}" style="color:#000000;text-decoration:none;">{{../d.headline}}</a></div>
+      {{#if ../d.subtitle}}<div style="font-size:18px;line-height:22px;">{{../d.subtitle}}</div>{{/if}}
+      {{#if ../d.description}}<p style="margin:12px 0 0;">{{rt ../d.description}}</p>{{/if}}
+      {{#if ../d.product.price}}<div style="margin-top:16px;">{{> ca-price p=../d.product prefix=../d.price_prefix color="#000000" muted=muted t=../t}}</div>{{/if}}
+    </mj-text>
+    {{> ca-button label=(fallback ../d.cta_label ../t.labels.product_cta) url=(fallback ../d.product.product_url ../d.link_url) bg=button color=button_text align="center" padding="18px 0 0"}}
+  </mj-column>
+</mj-section>
+{{/with}}

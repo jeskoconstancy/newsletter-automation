@@ -1,0 +1,151 @@
+{
+  "id": "HEADER_01",
+  "brand": "seltmann-weiden",
+  "name": "Header – Logo links, Shop-Link rechts",
+  "version": "1.0.0",
+  "category": "header",
+  "status": "stable",
+  "purpose": "Markenkennung und Einstieg in den Online-Shop am Anfang jedes Newsletters.",
+  "description": "Vollbreiter Balken in Primärfarbe mit weißem Logo links (124px) und dem Textlink 'Online-Shop ➞' (Poppins 14px) rechts. In allen 9 Referenzen identisch.",
+  "use_cases": [
+    "brand_identification",
+    "shop_entry"
+  ],
+  "campaign_types": [
+    "collection_spotlight",
+    "sale",
+    "seasonal_campaign",
+    "product_launch",
+    "new_arrivals",
+    "gift_guide",
+    "voucher",
+    "black_week",
+    "brand_story",
+    "product_recommendations"
+  ],
+  "position": {
+    "slot": "first",
+    "unique": true,
+    "max_per_newsletter": 1
+  },
+  "fields": {
+    "logo": {
+      "type": "object",
+      "required": true,
+      "description": "Logo-Daten (url, alt, width).",
+      "source": "shop_profile",
+      "default_from": "shop.logo",
+      "fields": {
+        "url": {
+          "type": "url",
+          "required": true,
+          "description": "Logo-URL (weiß, transparent, PNG).",
+          "source": "shop_profile",
+          "validation": {
+            "https_only": true
+          }
+        },
+        "alt": {
+          "type": "string",
+          "required": true,
+          "description": "Alt-Text des Logos.",
+          "source": "shop_profile",
+          "validation": {
+            "min_length": 2,
+            "max_length": 60
+          }
+        },
+        "width": {
+          "type": "integer",
+          "required": true,
+          "description": "Anzeigebreite in px.",
+          "source": "shop_profile",
+          "default": 124,
+          "validation": {
+            "min": 60,
+            "max": 220
+          }
+        }
+      }
+    },
+    "logo_link_url": {
+      "type": "url",
+      "required": false,
+      "description": "Optionaler Link des Logos.",
+      "source": "shop_profile",
+      "default_from": "shop.urls.shop",
+      "validation": {
+        "https_only": true
+      }
+    },
+    "link_label": {
+      "type": "string",
+      "required": true,
+      "description": "Text des Shop-Links (Pfeil ➞ wird automatisch ergänzt).",
+      "source": "shop_profile",
+      "default_from": "shop.header.link_label",
+      "validation": {
+        "min_length": 2,
+        "max_length": 24
+      }
+    },
+    "link_url": {
+      "type": "url",
+      "required": true,
+      "description": "Ziel des Shop-Links.",
+      "source": "shop_profile",
+      "default_from": "shop.header.link_url",
+      "validation": {
+        "https_only": true
+      }
+    }
+  },
+  "image_requirements": [
+    {
+      "key": "logo",
+      "field": "logo",
+      "image_type": "logo",
+      "aspect_ratio": null,
+      "display_width": 124,
+      "min_width": 248,
+      "formats": [
+        "png"
+      ],
+      "alt_required": true,
+      "usage": "Weißes Logo auf Primärfarbe, transparenter Hintergrund",
+      "rendering": "img"
+    }
+  ],
+  "layout": {
+    "desktop_columns": 2,
+    "mobile_columns": 2,
+    "full_width": true,
+    "uses_background_image": false,
+    "approx_height_px": {
+      "desktop": 92,
+      "mobile": 92
+    },
+    "space_weight": "xs"
+  },
+  "constraints": [
+    "must_be_first_block",
+    "exactly_one_per_newsletter",
+    "data_usually_empty_uses_shop_profile"
+  ],
+  "exclusion_criteria": [],
+  "compatibility": {
+    "recommended_after": [],
+    "recommended_before": [
+      "HERO_01"
+    ],
+    "avoid_adjacent": [
+      "DIVIDER_01"
+    ],
+    "hard_dependencies": []
+  },
+  "ai_hints": {
+    "when_to_use": "Immer als erster Baustein.",
+    "when_not_to_use": "Nie weglassen.",
+    "content_guidelines": "Keine Daten nötig – alles kommt aus dem Shop-Profil. Nur bei Kampagnen mit eigener Landingpage link_url überschreiben."
+  }
+}

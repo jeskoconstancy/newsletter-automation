@@ -1,0 +1,126 @@
+{
+  "id": "CTA_BUTTON_01",
+  "brand": "seltmann-weiden",
+  "name": "CTA-Button",
+  "version": "1.0.0",
+  "category": "utility",
+  "status": "stable",
+  "purpose": "Eigenständiger Call-to-Action, z. B. nach einem Bildraster.",
+  "description": "Eckiger Button in Primärfarbe, weiße fette Schrift 15px, Pfeil ➞. Zentriert.",
+  "use_cases": [
+    "secondary_cta",
+    "closing_cta"
+  ],
+  "campaign_types": [
+    "collection_spotlight",
+    "sale",
+    "seasonal_campaign",
+    "product_launch",
+    "new_arrivals",
+    "gift_guide",
+    "voucher",
+    "black_week",
+    "brand_story",
+    "product_recommendations"
+  ],
+  "position": {
+    "slot": "body",
+    "unique": false,
+    "max_per_newsletter": 3
+  },
+  "fields": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "description": "Buttontext (➞ automatisch). Standard in Versalien: 'JETZT ENTDECKEN'.",
+      "source": "ai_agent",
+      "validation": {
+        "min_length": 3,
+        "max_length": 40
+      }
+    },
+    "url": {
+      "type": "url",
+      "required": true,
+      "description": "Ziel-URL.",
+      "source": "campaign_brief",
+      "validation": {
+        "https_only": true
+      }
+    },
+    "align": {
+      "type": "enum",
+      "required": false,
+      "description": "Ausrichtung.",
+      "source": "static_default",
+      "values": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "center"
+    },
+    "spacing_top": {
+      "type": "enum",
+      "required": false,
+      "description": "Abstand oben (s=20px, m=30px, l=50px, none=0).",
+      "source": "static_default",
+      "values": [
+        "none",
+        "s",
+        "m",
+        "l"
+      ],
+      "default": "s"
+    },
+    "spacing_bottom": {
+      "type": "enum",
+      "required": false,
+      "description": "Abstand unten (s=20px, m=30px, l=50px, none=0).",
+      "source": "static_default",
+      "values": [
+        "none",
+        "s",
+        "m",
+        "l"
+      ],
+      "default": "m"
+    }
+  },
+  "image_requirements": [],
+  "layout": {
+    "desktop_columns": 1,
+    "mobile_columns": 1,
+    "full_width": false,
+    "uses_background_image": false,
+    "approx_height_px": {
+      "desktop": 100,
+      "mobile": 100
+    },
+    "space_weight": "xs"
+  },
+  "constraints": [
+    "requires_label_and_url"
+  ],
+  "exclusion_criteria": [],
+  "compatibility": {
+    "recommended_after": [
+      "IMAGE_GRID_01",
+      "PRODUCT_GRID_01",
+      "TEXT_BLOCK_01"
+    ],
+    "recommended_before": [
+      "DIVIDER_01"
+    ],
+    "avoid_adjacent": [
+      "CTA_BUTTON_01",
+      "INTRO_TEXT_01"
+    ],
+    "hard_dependencies": []
+  },
+  "ai_hints": {
+    "when_to_use": "Wenn nach einem Bild-/Produktblock ein klarer nächster Schritt fehlt.",
+    "when_not_to_use": "Direkt nach INTRO_TEXT_01 (enthält bereits einen Button).",
+    "content_guidelines": "Verb + Objekt: 'Black Deals sichern', 'Hier geht's zu den Gutscheinen'."
+  }
+}

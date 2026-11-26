@@ -1,0 +1,333 @@
+{
+  "id": "PRODUCT_GRID_01",
+  "brand": "seltmann-weiden",
+  "name": "Produktraster – 2, 3 oder 4 Produkte",
+  "version": "1.0.0",
+  "category": "product",
+  "status": "derived",
+  "purpose": "Präsentation konkreter Produkte aus dem Produktfeed mit Preis, optional Streichpreis und Badge.",
+  "description": "Weiße Produktkarten (Stil der Editorial-Karte) mit quadratischem Bild, Name, optional Kurzbeschreibung, Preis in Primärfarbe (fett), Streichpreis grau, Badge als Primärfarben-Label und Textlink 'Zum Produkt ➞'. 2 Produkte = 2 Spalten, 3 = 3 Spalten, 4 = 2×2. Optional Überschrift und 'Alle ansehen'-Button.",
+  "use_cases": [
+    "product_recommendations",
+    "sale_products",
+    "new_products",
+    "cross_selling"
+  ],
+  "campaign_types": [
+    "sale",
+    "black_week",
+    "product_launch",
+    "new_arrivals",
+    "product_recommendations",
+    "collection_spotlight",
+    "gift_guide",
+    "seasonal_campaign"
+  ],
+  "position": {
+    "slot": "body",
+    "unique": false,
+    "max_per_newsletter": 3
+  },
+  "fields": {
+    "products": {
+      "type": "array",
+      "required": true,
+      "description": "2, 3 oder 4 Produkte.",
+      "source": "product_feed",
+      "validation": {
+        "min_items": 2,
+        "max_items": 4,
+        "allowed_counts": [
+          2,
+          3,
+          4
+        ]
+      },
+      "item_fields": {
+        "sku": {
+          "type": "string",
+          "required": true,
+          "description": "Artikelnummer aus dem Feed (für Tracking/Abgleich, nicht sichtbar).",
+          "source": "product_feed",
+          "validation": {
+            "min_length": 1,
+            "max_length": 64
+          }
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Produktname.",
+          "source": "product_feed",
+          "validation": {
+            "min_length": 3,
+            "max_length": 60,
+            "recommended_max_length": 45
+          }
+        },
+        "product_url": {
+          "type": "url",
+          "required": true,
+          "description": "Produktdetailseite.",
+          "source": "product_feed",
+          "validation": {
+            "https_only": true
+          }
+        },
+        "image": {
+          "type": "image",
+          "required": true,
+          "description": "Produktbild (Freisteller oder Milieu, quadratisch).",
+          "source": "product_feed",
+          "validation": {
+            "image_requirement": "product_image"
+          },
+          "fields": {
+            "url": {
+              "type": "url",
+              "required": true,
+              "description": "Absolute HTTPS-URL des Bildes (im Vorschaumodus auch relativ).",
+              "source": "product_feed",
+              "validation": {
+                "https_only": true
+              }
+            },
+            "alt": {
+              "type": "string",
+              "required": true,
+              "description": "Alternativtext, beschreibt den sichtbaren Bildinhalt (nicht den Dateinamen).",
+              "source": "ai_agent",
+              "validation": {
+                "min_length": 3,
+                "max_length": 140
+              }
+            },
+            "width": {
+              "type": "integer",
+              "required": false,
+              "description": "Pixelbreite der Originaldatei – nötig für Verhältnis-/Auflösungsprüfung.",
+              "source": "product_feed",
+              "validation": {
+                "min": 1
+              }
+            },
+            "height": {
+              "type": "integer",
+              "required": false,
+              "description": "Pixelhöhe der Originaldatei.",
+              "source": "product_feed",
+              "validation": {
+                "min": 1
+              }
+            },
+            "asset_id": {
+              "type": "string",
+              "required": false,
+              "description": "Referenz auf das Asset im Bildreferenz-Format (asset-reference-schema.json).",
+              "source": "product_feed"
+            },
+            "rights_status": {
+              "type": "enum",
+              "required": false,
+              "description": "Nutzungsfreigabe des Bildes.",
+              "source": "product_feed",
+              "values": [
+                "approved",
+                "pending",
+                "unknown",
+                "rejected"
+              ],
+              "default": "unknown"
+            }
+          }
+        },
+        "price": {
+          "type": "price",
+          "required": true,
+          "description": "Aktueller Preis (Zahl oder '29,90').",
+          "source": "product_feed",
+          "format": "Dezimalzahl; Ausgabe '29,90 €'"
+        },
+        "old_price": {
+          "type": "price",
+          "required": false,
+          "description": "Streichpreis/UVP – nur wenn > price.",
+          "source": "product_feed"
+        },
+        "currency": {
+          "type": "enum",
+          "required": false,
+          "description": "Währung.",
+          "source": "product_feed",
+          "values": [
+            "EUR",
+            "CHF"
+          ],
+          "default": "EUR"
+        },
+        "price_prefix": {
+          "type": "string",
+          "required": false,
+          "description": "z. B. 'ab' bei Serien/Sets.",
+          "source": "product_feed",
+          "validation": {
+            "max_length": 6
+          }
+        },
+        "badge": {
+          "type": "string",
+          "required": false,
+          "description": "Kurzes Label, z. B. '-30 %' oder 'Neu'.",
+          "source": "ai_agent",
+          "validation": {
+            "max_length": 14
+          }
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "description": "Kurzbeschreibung (1 Satz).",
+          "source": "ai_agent",
+          "validation": {
+            "max_length": 90
+          }
+        },
+        "cta_label": {
+          "type": "string",
+          "required": false,
+          "description": "Link-Text je Produkt (sonst Block-Standard).",
+          "source": "ai_agent",
+          "validation": {
+            "max_length": 24
+          }
+        }
+      }
+    },
+    "headline": {
+      "type": "string",
+      "required": false,
+      "description": "Zentrierte Überschrift über dem Raster.",
+      "source": "ai_agent",
+      "validation": {
+        "max_length": 60
+      }
+    },
+    "cta_label": {
+      "type": "string",
+      "required": false,
+      "description": "Standard-Linktext je Produkt.",
+      "source": "static_default",
+      "default": "Zum Produkt",
+      "validation": {
+        "max_length": 24
+      }
+    },
+    "cta_label_all": {
+      "type": "string",
+      "required": false,
+      "description": "Buttontext unter dem Raster.",
+      "source": "ai_agent",
+      "default": "Alle Angebote ansehen",
+      "validation": {
+        "max_length": 40
+      }
+    },
+    "cta_url": {
+      "type": "url",
+      "required": false,
+      "description": "Ziel des Buttons. Ohne URL kein Button.",
+      "source": "campaign_brief",
+      "validation": {
+        "https_only": true
+      }
+    },
+    "show_price_asterisk": {
+      "type": "boolean",
+      "required": false,
+      "description": "Sternchen am Preis (verweist auf Preishinweis im Footer).",
+      "source": "static_default",
+      "default": true
+    }
+  },
+  "item_count": {
+    "products": {
+      "allowed": [
+        2,
+        3,
+        4
+      ],
+      "layout": {
+        "2": "2 Spalten",
+        "3": "3 Spalten",
+        "4": "2×2"
+      }
+    }
+  },
+  "image_requirements": [
+    {
+      "key": "product_image",
+      "field": "products[].image",
+      "image_type": "product",
+      "aspect_ratio": "1:1",
+      "display_width": 340,
+      "min_width": 600,
+      "formats": [
+        "jpg",
+        "jpeg",
+        "png",
+        "gif"
+      ],
+      "alt_required": true,
+      "crop": "quadratisch, Produkt zentriert, gleicher Hintergrund für alle Produkte",
+      "focus": "zentriert",
+      "usage": "Feed-Bild (Freisteller) oder Milieubild",
+      "rendering": "img"
+    }
+  ],
+  "layout": {
+    "desktop_columns": "2|3|2×2",
+    "mobile_columns": 1,
+    "full_width": false,
+    "uses_background_image": false,
+    "approx_height_px": {
+      "2_products": 520,
+      "3_products": 430,
+      "4_products": 1040
+    },
+    "space_weight": "l"
+  },
+  "constraints": [
+    "products_count_2_3_or_4",
+    "all_products_need_valid_urls",
+    "all_products_need_prices",
+    "old_price_must_exceed_price",
+    "all_product_images_1_1",
+    "footer_price_note_required"
+  ],
+  "exclusion_criteria": [
+    "Weniger als 2 Produkte mit Preis und Bild → PRODUCT_SPOTLIGHT_01 oder IMAGE_GRID_01.",
+    "Preise nicht tagesaktuell aus dem Feed → nicht verwenden."
+  ],
+  "compatibility": {
+    "recommended_after": [
+      "INTRO_TEXT_01",
+      "TEXT_BLOCK_01",
+      "DIVIDER_01"
+    ],
+    "recommended_before": [
+      "DIVIDER_01",
+      "EDITORIAL_CARD_01"
+    ],
+    "avoid_adjacent": [
+      "PRODUCT_GRID_01"
+    ],
+    "hard_dependencies": [
+      "FOOTER_01.show_price_note=true (wegen Preis-Sternchen)"
+    ]
+  },
+  "ai_hints": {
+    "when_to_use": "Wenn das Briefing konkrete Produkte/Preise nennt oder ein Feed-Abgleich passende Angebote liefert.",
+    "when_not_to_use": "Bei reinen Image-/Kollektionsmailings ohne Preisbezug (Referenzstandard!).",
+    "content_guidelines": "Badge nur bei echtem Rabatt ('-30 %') oder Neuheit ('Neu'). Namen aus dem Feed nicht umschreiben."
+  }
+}

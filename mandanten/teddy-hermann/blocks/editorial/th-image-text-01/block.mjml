@@ -1,0 +1,28 @@
+{{!-- TH_IMAGE_TEXT_01 · Bild (30/40/50 %) neben Headline + Text, Bild links oder rechts. Button unter dem Modul (zentriert) oder in der Textspalte.
+     Bild rechts = direction="rtl": im HTML steht das Bild zuerst → mobil immer Bild oben, Text darunter. --}}
+<mj-section padding="{{spacing d.spacing_top}}px {{t.layout.section_padding_x}}px {{#if (and d.cta_label d.cta_url (eq d.cta_position "below"))}}0{{else}}{{spacing d.spacing_bottom}}{{/if}}px"{{#if (eq d.image_side "right")}} direction="rtl"{{/if}} css-class="th-image-text">
+  <mj-column width="{{d.image_width}}%" padding="{{t.layout.column_padding}}px" vertical-align="middle">
+    <mj-image src="{{asset d.image.url}}" alt="{{d.image.alt}}" title="{{d.image.alt}}"{{#if (fallback d.image_link_url d.cta_url)}} href="{{link (fallback d.image_link_url d.cta_url)}}"{{/if}} align="center" />
+  </mj-column>
+  <mj-column width="{{#if (eq d.image_width "30")}}70{{else if (eq d.image_width "50")}}50{{else}}60{{/if}}%" padding="{{t.layout.column_padding}}px" vertical-align="middle" css-class="th-it-text">
+    {{#if d.headline}}
+    <mj-text css-class="th-headline" padding="0 0 {{#if (or d.paragraphs d.note)}}18px{{else}}0{{/if}}">
+      <h2 style="margin:0;font-size:{{t.type.headline.size}};line-height:{{t.type.headline.line_height}};font-weight:{{#if (eq d.headline_weight "regular")}}400{{else}}{{t.type.headline.weight}}{{/if}};color:{{#if (eq d.headline_color "dark")}}{{t.color.heading_alt}}{{else}}{{t.color.heading}}{{/if}};">{{nl2br d.headline}}</h2>
+    </mj-text>
+    {{/if}}
+    <mj-text align="{{d.align}}">
+      {{#each d.paragraphs}}<p style="margin:0{{#unless @last}} 0 21px{{/unless}};text-align:{{../d.align}};">{{rt this}}</p>{{/each}}
+      {{#if d.note}}<p style="margin:{{#if d.paragraphs}}21px{{else}}0{{/if}} 0 0;font-size:{{t.type.note.size}};line-height:{{t.type.note.line_height}};text-align:left;">{{d.note}}</p>{{/if}}
+    </mj-text>
+    {{#if (and d.cta_label d.cta_url (eq d.cta_position "column"))}}
+    {{> button label=d.cta_label url=d.cta_url variant=d.cta_variant preserve_case=d.cta_preserve_case align="center" padding="20px 0 0"}}
+    {{/if}}
+  </mj-column>
+</mj-section>
+{{#if (and d.cta_label d.cta_url (eq d.cta_position "below"))}}
+<mj-section padding="0 {{t.layout.section_padding_x}}px {{spacing d.spacing_bottom}}px">
+  <mj-column padding="{{t.layout.column_padding}}px">
+    {{> button label=d.cta_label url=d.cta_url variant=d.cta_variant preserve_case=d.cta_preserve_case align="center" padding="10px 0 0"}}
+  </mj-column>
+</mj-section>
+{{/if}}

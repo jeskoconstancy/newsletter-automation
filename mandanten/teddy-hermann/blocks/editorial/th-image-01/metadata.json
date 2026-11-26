@@ -1,0 +1,193 @@
+{
+  "id": "TH_IMAGE_01",
+  "brand": "teddy-hermann",
+  "name": "Einzelbild zentriert",
+  "version": "1.0.0",
+  "category": "editorial",
+  "status": "stable",
+  "purpose": "Ein einzelnes Motiv (z. B. Gutscheinmuster) zentriert mit frei wählbarer Breite zeigen.",
+  "description": "Zentriertes Bild mit fester Anzeigebreite (150–700px), optional verlinkt. last_minute zeigt so das Gutscheinmotiv mit 300px unter dem Button.",
+  "use_cases": [
+    "voucher_visual",
+    "single_visual"
+  ],
+  "campaign_types": [
+    "voucher",
+    "gift_guide",
+    "seasonal_campaign",
+    "product_launch",
+    "free_gift"
+  ],
+  "position": {
+    "slot": "body",
+    "unique": false,
+    "max_per_newsletter": 3
+  },
+  "fields": {
+    "image": {
+      "type": "image",
+      "required": true,
+      "description": "Motiv (JPG/PNG).",
+      "source": "asset_pipeline",
+      "validation": {
+        "image_requirement": "single_image"
+      },
+      "fields": {
+        "url": {
+          "type": "url",
+          "required": true,
+          "description": "Absolute HTTPS-URL (Rapidmail-Medienarchiv c.emailsys1a.net oder teddy-hermann-shop.de; im Vorschaumodus auch relativ).",
+          "source": "asset_pipeline",
+          "validation": {
+            "https_only": true
+          }
+        },
+        "alt": {
+          "type": "string",
+          "required": true,
+          "description": "Alternativtext. Bei Bildern mit eingebranntem Text MUSS der Bildtext enthalten sein (wird bei blockierten Bildern angezeigt).",
+          "source": "ai_agent",
+          "validation": {
+            "min_length": 3,
+            "max_length": 140
+          }
+        },
+        "width": {
+          "type": "integer",
+          "required": false,
+          "description": "Pixelbreite der Originaldatei – nötig für Verhältnis-/Auflösungsprüfung.",
+          "source": "asset_pipeline",
+          "validation": {
+            "min": 1
+          }
+        },
+        "height": {
+          "type": "integer",
+          "required": false,
+          "description": "Pixelhöhe der Originaldatei.",
+          "source": "asset_pipeline",
+          "validation": {
+            "min": 1
+          }
+        },
+        "asset_id": {
+          "type": "string",
+          "required": false,
+          "description": "Referenz im Bildreferenz-Format (registry/asset-reference-schema.json).",
+          "source": "asset_pipeline"
+        },
+        "rights_status": {
+          "type": "enum",
+          "required": false,
+          "description": "Nutzungsfreigabe des Bildes.",
+          "source": "asset_pipeline",
+          "values": [
+            "approved",
+            "pending",
+            "unknown",
+            "rejected"
+          ],
+          "default": "unknown"
+        }
+      }
+    },
+    "width": {
+      "type": "integer",
+      "required": false,
+      "description": "Anzeigebreite in px.",
+      "source": "ai_agent",
+      "default": 300,
+      "validation": {
+        "min": 150,
+        "max": 700
+      }
+    },
+    "link_url": {
+      "type": "url",
+      "required": false,
+      "description": "Optionaler Link.",
+      "source": "campaign_brief",
+      "validation": {
+        "https_only": true
+      }
+    },
+    "spacing_top": {
+      "type": "enum",
+      "required": false,
+      "description": "Abstand oben. none = 0, s = 20px, m = 30px, l = 50px.",
+      "source": "static_default",
+      "values": [
+        "none",
+        "s",
+        "m",
+        "l"
+      ],
+      "default": "none"
+    },
+    "spacing_bottom": {
+      "type": "enum",
+      "required": false,
+      "description": "Abstand unten. none = 0, s = 20px, m = 30px, l = 50px.",
+      "source": "static_default",
+      "values": [
+        "none",
+        "s",
+        "m",
+        "l"
+      ],
+      "default": "s"
+    }
+  },
+  "image_requirements": [
+    {
+      "key": "single_image",
+      "field": "image",
+      "image_type": "promo_banner",
+      "aspect_ratio": null,
+      "display_width": 300,
+      "min_width": 600,
+      "formats": [
+        "jpg",
+        "jpeg",
+        "png",
+        "gif"
+      ],
+      "alt_required": true,
+      "usage": "Gutscheinmotiv, Aktionsmotiv",
+      "rendering": "img"
+    }
+  ],
+  "layout": {
+    "desktop_columns": 1,
+    "mobile_columns": 1,
+    "full_width": false,
+    "uses_background_image": false,
+    "approx_height_px": {
+      "desktop": 200,
+      "mobile": 200
+    },
+    "space_weight": "m"
+  },
+  "constraints": [
+    "requires_image"
+  ],
+  "exclusion_criteria": [
+    "700px-Banner → TH_BANNER_01."
+  ],
+  "compatibility": {
+    "recommended_after": [
+      "TH_TEXT_01",
+      "TH_CTA_BUTTON_01"
+    ],
+    "recommended_before": [
+      "TH_FOOTER_01"
+    ],
+    "avoid_adjacent": [],
+    "hard_dependencies": []
+  },
+  "ai_hints": {
+    "when_to_use": "Gutschein-/Einzelmotiv, das nicht volle Breite braucht.",
+    "when_not_to_use": "Für Produktbilder → TH_IMAGE_TEXT_01 oder TH_PRODUCT_GRID_01.",
+    "content_guidelines": "ALT-Text beschreibt Motiv und ggf. Bildtext."
+  }
+}

@@ -1,0 +1,250 @@
+{
+  "id": "TH_TEXT_01",
+  "brand": "teddy-hermann",
+  "name": "Textblock – Headline, Text, Hinweis, Button",
+  "version": "1.0.0",
+  "category": "text",
+  "status": "stable",
+  "purpose": "Botschaft des Banners textlich ausformulieren: Headline, Fließtext, optional Gutscheincode und Aktionsbedingungen, Button.",
+  "description": "Zentrierter Textblock: Headline 20px fett (rot oder dunkelgrau), Fließtext 14/21, optional hervorgehobener Gutscheincode (weiß auf Grün), Kleingedrucktes 11px und eckiger roter Button. In 10/10 Referenzen direkt unter dem Hero; in 2/10 zusätzlich nach einem Banner (schulstart, muttertag).",
+  "use_cases": [
+    "intro",
+    "offer_explanation",
+    "contest_description",
+    "voucher_code",
+    "terms_note"
+  ],
+  "campaign_types": [
+    "seasonal_campaign",
+    "sale",
+    "voucher",
+    "gift_guide",
+    "new_arrivals",
+    "product_launch",
+    "collection_spotlight",
+    "contest",
+    "free_gift",
+    "free_shipping",
+    "product_recommendations",
+    "brand_story"
+  ],
+  "position": {
+    "slot": "body",
+    "unique": false,
+    "max_per_newsletter": 3
+  },
+  "fields": {
+    "headline": {
+      "type": "string",
+      "required": false,
+      "description": "Überschrift 20px fett. Zeilenumbruch mit \\n möglich. Höchstens ein Emoji am Ende (biene 🐝, halloween 🍂). Versalien nur, wenn bewusst so geschrieben (valentinstag, sommersuchspiel).",
+      "source": "ai_agent",
+      "validation": {
+        "min_length": 3,
+        "max_length": 90,
+        "recommended_max_length": 70
+      },
+      "example": "Deine Valentinstags-Überraschung wartet!"
+    },
+    "headline_color": {
+      "type": "enum",
+      "required": false,
+      "description": "accent = Rot #ff0000 (8/10, Standard), dark = Dunkelgrau #545654 (Service-/Gewinnspieltexte: versandkostenfrei, schulstart, muttertag, sommersuchspiel).",
+      "source": "ai_agent",
+      "values": [
+        "accent",
+        "dark"
+      ],
+      "default": "accent"
+    },
+    "headline_weight": {
+      "type": "enum",
+      "required": false,
+      "description": "bold = fett (Standard, 9/10), regular = normal (halloween: dunkelgrau, mit Emoji).",
+      "source": "ai_agent",
+      "values": [
+        "bold",
+        "regular"
+      ],
+      "default": "bold"
+    },
+    "paragraphs": {
+      "type": "paragraphs",
+      "required": false,
+      "description": "Absätze. Erlaubt: <strong>, <em>, <br>. Immer Du-Ansprache (du/dein, klein). Aktionsbedingungen nicht hier, sondern in 'note'. Preise/Rabatte mit * kennzeichnen.",
+      "source": "ai_agent",
+      "validation": {
+        "min_items": 1,
+        "max_items": 4,
+        "item_max_length": 600,
+        "total_max_length": 1100
+      }
+    },
+    "align": {
+      "type": "enum",
+      "required": false,
+      "description": "center = Standard (9/10), left = linksbündig (muttertag-Gewinnspiel), justify = Blocksatz.",
+      "source": "ai_agent",
+      "values": [
+        "center",
+        "left",
+        "justify"
+      ],
+      "default": "center"
+    },
+    "coupon_code": {
+      "type": "string",
+      "required": false,
+      "description": "Gutscheincode, wird als eigene Zeile weiß auf Grün hervorgehoben (versandkostenfrei: VERSANDGRATIS).",
+      "source": "campaign_brief",
+      "validation": {
+        "min_length": 3,
+        "max_length": 30,
+        "pattern": "^[A-Z0-9][A-Z0-9_-]{2,29}$"
+      }
+    },
+    "coupon_position": {
+      "type": "enum",
+      "required": false,
+      "description": "after_first = nach dem ersten Absatz (Standard, Satz endet mit '…den Gutscheincode'), after_all = nach allen Absätzen.",
+      "source": "ai_agent",
+      "values": [
+        "after_first",
+        "after_all"
+      ],
+      "default": "after_first"
+    },
+    "note": {
+      "type": "string",
+      "required": false,
+      "description": "Kleingedrucktes (11px), z. B. '*Die Aktion ist bis zum 14.2.2026 gültig. Nur solange der Vorrat reicht. Nicht mit anderen Rabatten kombinierbar.' Pflicht, wenn im Text ein * auf Bedingungen verweist.",
+      "source": "campaign_brief",
+      "validation": {
+        "max_length": 300
+      }
+    },
+    "cta_label": {
+      "type": "string",
+      "required": false,
+      "description": "Buttontext. Wird in Versalien dargestellt (außer cta_preserve_case). Muster: 'JETZT ENTDECKEN', 'JETZT SPAREN', 'JETZT MITMACHEN', 'ZUM GEWINNSPIEL'. Kein Pfeil.",
+      "source": "ai_agent",
+      "validation": {
+        "min_length": 3,
+        "max_length": 40,
+        "recommended_max_length": 30
+      }
+    },
+    "cta_url": {
+      "type": "url",
+      "required": false,
+      "description": "Ziel des Buttons. Ohne URL kein Button.",
+      "source": "campaign_brief",
+      "validation": {
+        "https_only": true
+      }
+    },
+    "cta_variant": {
+      "type": "enum",
+      "required": false,
+      "description": "primary = rot (Standard, 19/20 Buttons), secondary = dunkelgrau #545654 (versandkostenfrei – für ruhige Service-Aktionen).",
+      "source": "ai_agent",
+      "values": [
+        "primary",
+        "secondary"
+      ],
+      "default": "primary"
+    },
+    "cta_preserve_case": {
+      "type": "boolean",
+      "required": false,
+      "description": "true = Buttontext nicht in Versalien umwandeln (halloween, last_minute: 'Hier geht's zu den Gutscheinen!').",
+      "source": "ai_agent",
+      "default": false
+    },
+    "cta_align": {
+      "type": "enum",
+      "required": false,
+      "description": "Ausrichtung des Buttons.",
+      "source": "static_default",
+      "values": [
+        "center",
+        "left"
+      ],
+      "default": "center"
+    },
+    "spacing_top": {
+      "type": "enum",
+      "required": false,
+      "description": "Abstand oben (Standard s = 20px wie in den Referenzen). none = 0, s = 20px, m = 30px, l = 50px.",
+      "source": "static_default",
+      "values": [
+        "none",
+        "s",
+        "m",
+        "l"
+      ],
+      "default": "s"
+    },
+    "spacing_bottom": {
+      "type": "enum",
+      "required": false,
+      "description": "Abstand unten. none = 0, s = 20px, m = 30px, l = 50px.",
+      "source": "static_default",
+      "values": [
+        "none",
+        "s",
+        "m",
+        "l"
+      ],
+      "default": "s"
+    }
+  },
+  "image_requirements": [],
+  "layout": {
+    "desktop_columns": 1,
+    "mobile_columns": 1,
+    "full_width": false,
+    "uses_background_image": false,
+    "approx_height_px": {
+      "desktop": 260,
+      "mobile": 400
+    },
+    "space_weight": "m"
+  },
+  "constraints": [
+    "headline_or_paragraphs_required",
+    "note_required_if_asterisk_in_text",
+    "max_one_cta"
+  ],
+  "exclusion_criteria": [],
+  "compatibility": {
+    "recommended_after": [
+      "TH_HERO_01",
+      "TH_BANNER_01"
+    ],
+    "recommended_before": [
+      "TH_PRODUCT_GRID_01",
+      "TH_BANNER_01",
+      "TH_IMAGE_01"
+    ],
+    "avoid_adjacent": [],
+    "hard_dependencies": []
+  },
+  "ai_hints": {
+    "when_to_use": "Direkt unter dem Hero (Standard) und für Gewinnspiel-/Aktionsbeschreibungen nach einem Banner.",
+    "when_not_to_use": "Für Produktvorstellungen mit Bild → TH_IMAGE_TEXT_01.",
+    "content_guidelines": "Headline greift das Banner-Angebot auf ('15% Rabatt* auf alle Kuscheltiere'). 2–4 Sätze emotional, warm, kindgerecht ohne Kindersprache; IMMER duzen (du/dich/dein – klein geschrieben), wie im Sommer-Suchspiel; nie Sie-Ansprache. Rabatte mit * und Bedingungen in note ('*Die Aktion ist bis zum TT.M.JJJJ gültig. Nur solange der Vorrat reicht.'). Wichtige Vorteile mit <strong> hervorheben. Button in Versalien: JETZT SPAREN / JETZT ENTDECKEN / JETZT MITMACHEN.",
+    "variant_selection": {
+      "sale|voucher|free_gift|free_shipping": {
+        "headline_color": "accent",
+        "align": "center"
+      },
+      "contest": {
+        "headline_color": "dark"
+      },
+      "free_shipping": {
+        "cta_variant": "secondary"
+      }
+    }
+  }
+}

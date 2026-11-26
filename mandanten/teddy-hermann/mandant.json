@@ -1,0 +1,239 @@
+{
+  "_info": "Mandanten-Konfiguration Teddy Hermann. Werte aus den Referenz-Previews rekonstruiert. TODO-Werte bitte ersetzen (Logo-URLs, Feed-URL, Preishinweis prüfen).",
+  "lang": "de-DE",
+  "feed_url": "TODO: https://www.teddy-hermann-shop.de/…/feed.csv",
+  "allowed_image_domain": "teddy-hermann-shop.de",
+  "product_name_max": 40,
+  "images_with_text_ok": true,
+  "utm": {
+    "enabled": false,
+    "source": "newsletter",
+    "medium": "email"
+  },
+  "shop": {
+    "id": "teddy-hermann",
+    "name": "Teddy Hermann",
+    "logo": {
+      "url": "https://www.teddy-hermann-shop.de/pub/media/logo/stores/17/hermann-teddy-logo-home2.png",
+      "alt": "Teddy Hermann Original",
+      "width": 700,
+      "height": 93
+    },
+    "footer_logo": {
+      "url": "https://www.teddy-hermann-shop.de/pub/media/wysiwyg/teddyhermann/homepage/hermann-teddy-logo-footer.png",
+      "alt": "Teddy Hermann Onlineshop",
+      "width": 80
+    },
+    "urls": {
+      "shop": "https://www.teddy-hermann-shop.de/",
+      "website_display": "www.teddy-hermann-shop.de"
+    },
+    "contact": {
+      "phone": "+49 (0) 3641 316 12 11",
+      "email": "service@teddy-hermann-shop.de"
+    },
+    "legal": {
+      "title": "Teddy Hermann Shop",
+      "operator_lines": [
+        "Betreibergesellschaft constancy GmbH",
+        "August-Bebel-Str. 27 b",
+        "07743 Jena",
+        "USt-IdNr.: DE 263322098",
+        "Steuernummer: 162/107/03601",
+        "Amtsgericht Jena"
+      ],
+      "operator": "Betreibergesellschaft constancy GmbH, August-Bebel-Str. 27 b, 07743 Jena",
+      "register": "HRB 502413",
+      "managing_directors": "Geschäftsführer: Tobias Reich, Mario Melle",
+      "rights": "All Rights Reserved ©",
+      "subscription_reason": "Du erhältst diese E-Mail, weil du in unserem Shop den Newsletter abonniert hast.",
+      "unsubscribe_sentence": "Wenn du den Newsletter nicht mehr erhalten möchtest, klicke {{link}}, um das Abonnement abzubestellen.",
+      "unsubscribe_link_label": "HIER",
+      "price_note": "* Alle Preise inkl. MwSt., zzgl. Versandkosten."
+    },
+    "esp": {
+      "name": "rapidmail",
+      "unsubscribe_url": "{%link_unsubscribe}"
+    }
+  },
+  "tokens": {
+    "color": {
+      "body_background": "#ededed",
+      "page_background": "#ffffff",
+      "text": "#545654",
+      "text_muted": "#545654",
+      "heading": "#ff0000",
+      "heading_alt": "#545654",
+      "divider": "#ff2600",
+      "button_primary": "#ff0000",
+      "button_secondary": "#545654",
+      "button_text": "#ffffff",
+      "price_sale": "#e74c3c",
+      "price_old": "#8c8c8c",
+      "coupon_background": "#16a085",
+      "footer_background": "#faf5f2",
+      "footer_text": "#b2b2b2",
+      "unsubscribe_text": "#bdc3c7"
+    },
+    "font": {
+      "base_family": "Arial, Helvetica, sans-serif"
+    },
+    "type": {
+      "base": {
+        "size": "14px",
+        "line_height": "21px"
+      },
+      "headline": {
+        "size": "20px",
+        "line_height": "28px",
+        "weight": 700
+      },
+      "note": {
+        "size": "11px",
+        "line_height": "17px"
+      },
+      "price_note": {
+        "size": "12px",
+        "line_height": "18px"
+      },
+      "footer": {
+        "size": "12px",
+        "line_height": "15px"
+      },
+      "footer_title": {
+        "size": "15px",
+        "line_height": "18px",
+        "weight": 700
+      },
+      "unsubscribe": {
+        "size": "12px",
+        "line_height": "14px"
+      }
+    },
+    "layout": {
+      "body_width": 700,
+      "content_width": 700,
+      "breakpoint": 580,
+      "section_padding_x": 10,
+      "column_padding": 10,
+      "header_padding_y": 7,
+      "footer_padding_y": 30,
+      "divider_width_percent": 90
+    },
+    "component": {
+      "divider": {
+        "width": "2px",
+        "style": "solid"
+      },
+      "button": {
+        "font_size": "15px",
+        "line_height": "22px",
+        "inner_padding": "8px 22px",
+        "border_radius": "0px"
+      }
+    },
+    "unsubscribe_link": {
+      "color": "#ff0000",
+      "weight": 400
+    },
+    "spacing": {
+      "none": 0,
+      "s": 20,
+      "m": 30,
+      "l": 50
+    },
+    "divider_pad": {
+      "none": 0,
+      "s": 10,
+      "m": 20,
+      "l": 30
+    }
+  },
+  "partials": {
+    "button": "<mj-button href=\"{{link url}}\" align=\"{{fallback align \"center\"}}\" padding=\"{{fallback padding \"0\"}}\" background-color=\"{{#if (eq variant \"secondary\")}}{{t.color.button_secondary}}{{else}}{{t.color.button_primary}}{{/if}}\" color=\"{{t.color.button_text}}\" border=\"none\" border-radius=\"{{t.component.button.border_radius}}\" font-size=\"{{t.component.button.font_size}}\" font-weight=\"700\" line-height=\"{{t.component.button.line_height}}\" inner-padding=\"{{t.component.button.inner_padding}}\" text-transform=\"{{#if preserve_case}}none{{else}}uppercase{{/if}}\">{{label}}</mj-button>",
+    "th-coupon": "<p style=\"margin:{{margin}};text-align:{{#if (eq align \"justify\")}}center{{else}}{{align}}{{/if}};\"><span style=\"display:inline-block;background-color:{{t.color.coupon_background}};color:#ffffff;font-weight:700;padding:1px 8px;letter-spacing:0.5px;\">{{code}}</span></p>",
+    "th-product-cell": "<mj-image src=\"{{asset p.image.url}}\" alt=\"{{p.image.alt}}\" title=\"{{p.name}}\" href=\"{{link p.product_url}}\" width=\"{{img}}px\" align=\"center\" padding=\"0 0 12px\" /><mj-text align=\"center\" css-class=\"th-product-name\"><div><a href=\"{{link p.product_url}}\" style=\"color:{{t.color.text}};text-decoration:none;\">{{p.name}}</a>{{#if p.subtitle}}<br />{{p.subtitle}}{{/if}}</div>{{#if p.price}}<div style=\"font-weight:700;\">{{#if p.price_prefix}}{{p.price_prefix}} {{/if}}{{#if p.old_price}}<span style=\"color:{{t.color.price_old}};text-decoration:line-through;\">{{price p.old_price p.currency}}{{#if d.show_price_asterisk}}*{{/if}}</span><br /><span style=\"color:{{t.color.price_sale}};\">{{price p.price p.currency}}{{#if d.show_price_asterisk}}*{{/if}}</span>{{else}}{{price p.price p.currency}}{{#if d.show_price_asterisk}}*{{/if}}{{/if}}</div>{{/if}}</mj-text>"
+  },
+  "mj_attributes": "<mj-section background-color=\"#ffffff\" /><mj-image padding=\"0\" />",
+  "css": "a { text-decoration: none; }\np { margin: 0; }\nh1, h2, h3 { margin: 0; padding: 0; }\n:root { color-scheme: light only; }\n@media only screen and (max-width: 580px) {\n  .th-it-text > table > tbody > tr > td { padding-top: 0 !important; }\n  .th-center-mobile div, .th-center-mobile p, .th-center-mobile h2 { text-align: center !important; }\n  .th-product-name div { font-size: 13px !important; line-height: 19px !important; }\n  .th-headline h2 { font-size: 18px !important; line-height: 25px !important; }\n  .th-hide-mobile { display: none !important; }\n}",
+  "prompt": {
+    "branche": "Plüschtiere und Teddybären, Familienmarke seit 1913",
+    "vision_rules": "Fertige Kampagnenbanner (ca. 700×255 oder 700×109) mit eingebranntem Text sind erwünscht: usage \"hero\" bzw. \"banner\" setzen, contains_text=true und im Feld description den Bildtext wörtlich wiedergeben. Produkt-Freisteller auf Weiß: type \"product\", usage [\"product\",\"tile\"].",
+    "rules": [
+      "TH_HERO_01: entweder eine fertige Kampagnengrafik (type promo_banner, Text im Bild) ODER ein querformatiges Ambientebild (type ambient, z. B. 1200×600) – Ambientebilder sind ausdrücklich erwünscht. TH_HERO_01 braucht link_url. Der ALT-Text gibt bei Grafiken den Bildtext wieder, bei Ambientebildern die Szene (aus description). TH_BANNER_01 kann ebenfalls ein querformatiges Ambientebild zeigen, um den zweiten Themenbereich einzuleiten.",
+      "TH_TEXT_01 als Einleitung (unter einem Hero oben) greift das Banner-Angebot in der Headline auf (z. B. '15% Rabatt* auf alle Kuscheltiere'). Rabatte mit * kennzeichnen und die Bedingungen in note schreiben ('*Die Aktion ist bis zum TT.M.JJJJ gültig. Nur solange der Vorrat reicht.') – nur mit Angaben aus dem Briefing. Gutscheincode in coupon_code (Großbuchstaben).",
+      "TH_IMAGE_TEXT_01 für jedes Thema mit starkem Einzelbild (Produkt-Freisteller, Gewinnspiel-Set). Bei zwei Modulen hintereinander image_side abwechseln, optional TH_DIVIDER_01 dazwischen.",
+      "Stimmungsbilder: Pro Newsletter möglichst alle passenden Ambientebilder nutzen – eins als Hero, weitere als TH_BANNER_01 (Querformat) oder in TH_IMAGE_TEXT_01. Freisteller vor allem in TH_PRODUCT_GRID_01.",
+      "TH_PRODUCT_GRID_01: Anzahl Produkte = Vielfaches von columns (Standard 4), höchstens 2 Reihen.",
+      "Texte: IMMER Du-Ansprache (du/dich/dein – klein geschrieben), nie Sie. Emotional, warm, kindgerecht ohne Kindersprache. 2–4 Sätze je Absatz. Wichtige Vorteile mit <strong>. Höchstens ein Emoji am Ende einer Headline. Buttons kurz in Versalien: JETZT SPAREN, JETZT ENTDECKEN, JETZT MITMACHEN, ZUM GEWINNSPIEL. Kein Pfeil."
+    ],
+    "style_example": "TH_TEXT_01 – Headline: \"Versandkostenfreie Lieferung mit dem Gutscheincode*\" · Absatz: \"Exklusiv für unsere Newsletter-Abonnenten schenken wir dir für kurze Zeit die Versandkosten innerhalb Deutschlands. Gib einfach den Gutscheincode\" · coupon_code \"VERSANDGRATIS\" · Absatz 2: \"im Warenkorb ein und bestelle deine Lieblingskuscheltiere versandkostenfrei.\" · TH_IMAGE_TEXT_01 – Headline \"UNSER GEWINNSPIEL\", Absatz \"Zum Valentinstag wird es bei uns besonders herzlich! Im großen Valentinstags-Gewinnspiel verlosen wir drei niedliche Dackel-Pärchen …\"",
+    "image_exclude_patterns": [
+      "/catalog/category/"
+    ]
+  },
+  "composition": {
+    "_info": "Freie Kombination zwischen Header und Footer. Harte Regeln werden im Node 'Newsletter rendern' geprüft (Fehler → automatische Korrekturrunde). examples = Anregungen für die KI, je Lauf wird eins zufällig als Ausgangspunkt vorgeschlagen.",
+    "content_blocks": {
+      "min": 3,
+      "max": 7,
+      "not_counted": [
+        "TH_DIVIDER_01",
+        "TH_SPACER_01"
+      ]
+    },
+    "max_per_block": 2,
+    "no_direct_repeat": true,
+    "hero_blocks": [
+      "TH_HERO_01"
+    ],
+    "intro_blocks": [],
+    "role_capable": {
+      "intro": [
+        "TH_TEXT_01",
+        "TH_IMAGE_TEXT_01"
+      ],
+      "fazit": [
+        "TH_TEXT_01",
+        "TH_CTA_BUTTON_01"
+      ]
+    },
+    "rules": [
+      "TH_TEXT_01 kann Einleitung (role intro), Zwischentext oder Fazit (role fazit) sein – maximal 2×, nie direkt hintereinander.",
+      "TH_BANNER_01 nicht direkt neben TH_HERO_01 (zwei Banner hintereinander wirken wie eine Bildwand).",
+      "Zwei TH_IMAGE_TEXT_01 nur mit anderem Baustein oder TH_DIVIDER_01 dazwischen und mit wechselnder image_side."
+    ],
+    "examples": [
+      {
+        "name": "Aktion mit Produkten",
+        "blocks": "TH_HERO_01 → TH_TEXT_01 (intro) → TH_PRODUCT_GRID_01 → TH_BANNER_01 → TH_IMAGE_TEXT_01 → TH_CTA_BUTTON_01 (fazit)",
+        "when": "Sale, Saisonkampagne, Black Week"
+      },
+      {
+        "name": "Gutschein",
+        "blocks": "TH_HERO_01 → TH_TEXT_01 (intro, mit coupon_code) → TH_IMAGE_01 → TH_PRODUCT_GRID_01 → TH_TEXT_01 (fazit)",
+        "when": "Gutschein, Geschenkideen"
+      },
+      {
+        "name": "Gewinnspiel",
+        "blocks": "TH_HERO_01 → TH_TEXT_01 (intro) → TH_IMAGE_TEXT_01 → TH_BANNER_01 → TH_IMAGE_TEXT_01 → TH_CTA_BUTTON_01 (fazit)",
+        "when": "Gewinnspiel, Mitmach-Aktion"
+      },
+      {
+        "name": "Neuheiten-Story",
+        "blocks": "TH_HERO_01 → TH_TEXT_01 (intro) → TH_IMAGE_TEXT_01 → TH_DIVIDER_01 → TH_IMAGE_TEXT_01 → TH_PRODUCT_GRID_01 → TH_TEXT_01 (fazit)",
+        "when": "Neue Artikel, Produktlaunch"
+      },
+      {
+        "name": "Schlussbild",
+        "blocks": "TH_TEXT_01 (intro) → TH_PRODUCT_GRID_01 → TH_IMAGE_TEXT_01 → TH_BANNER_01 → TH_TEXT_01 (fazit) → TH_HERO_01",
+        "when": "Marke/Story, emotionaler Abschluss mit Ambientebild"
+      },
+      {
+        "name": "Kompakt",
+        "blocks": "TH_HERO_01 → TH_TEXT_01 (intro) → TH_PRODUCT_GRID_01 → TH_CTA_BUTTON_01 (fazit)",
+        "when": "Versandkostenfrei, kurze Erinnerung"
+      }
+    ]
+  }
+}

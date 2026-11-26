@@ -1,0 +1,6 @@
+{{!-- TH_CTA_BUTTON_01 · Eigenständiger Button (rot, eckig, Versalien) --}}
+<mj-section padding="{{spacing d.spacing_top}}px {{t.layout.section_padding_x}}px {{spacing d.spacing_bottom}}px" css-class="th-cta">
+  <mj-column padding="{{t.layout.column_padding}}px">
+    {{> button label=d.label url=d.url variant=d.variant preserve_case=d.preserve_case align=d.align}}
+  </mj-column>
+</mj-section>

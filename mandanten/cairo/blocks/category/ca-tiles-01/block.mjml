@@ -1,0 +1,20 @@
+{{!-- CA_TILES_01 · 3 oder 6 Kacheln (je 184px, Abstand 24px, 3 nebeneinander – auch mobil): Bild + Beschriftungsfeld in der Kachelfarbe (Titel fett, optional Zusatzzeile). Für Kategorien ('Für Sie ausgewählte Kategorien') oder kleine Produkte/Zubehör. --}}
+{{#if (spacing d.spacing_top)}}{{> ca-gap h=(spacing d.spacing_top)}}{{/if}}
+{{#if (or d.heading_bold d.heading_light)}}{{> ca-heading bold=d.heading_bold light=d.heading_light bold_first=d.heading_bold_first color=(lookup t.heading_colors d.heading_color)}}{{/if}}
+{{#with (lookup t.palette d.tile_color)}}
+{{#each (chunk ../d.tiles 3)}}
+<mj-section padding="0" css-class="ca-tiles">
+  <mj-group>
+  {{#each this}}
+    <mj-column width="33.33%" vertical-align="top" padding="{{pick @index "0=0 16px 0 0|1=0 8px" "0 0 0 16px"}}" inner-background-color="{{../../bg}}" css-class="ca-t{{pick @index "0=1|1=2" "3"}}">
+      <mj-image src="{{asset (fallback image.url product.image.url)}}" alt="{{fallback image.alt (fallback product.image.alt title)}}" title="{{title}}" href="{{link (fallback link_url (fallback product.product_url ../../../d.link_url))}}" width="184px" fluid-on-mobile="true" />
+      <mj-text padding="11px 12px" color="{{../../text}}" css-class="ca-tile-label">
+        <div style="font-size:14px;line-height:20px;font-weight:700;min-height:{{#if ../../../d.two_lines}}40px{{else}}20px{{/if}};"><a href="{{link (fallback link_url (fallback product.product_url ../../../d.link_url))}}" style="color:{{../../text}};text-decoration:none;">{{title}}</a>{{#if subtitle}}<br /><span style="font-weight:300;">{{subtitle}}</span>{{/if}}</div>
+      </mj-text>
+    </mj-column>
+  {{/each}}
+  </mj-group>
+</mj-section>
+{{#unless @last}}{{> ca-gap h=24}}{{/unless}}
+{{/each}}
+{{/with}}

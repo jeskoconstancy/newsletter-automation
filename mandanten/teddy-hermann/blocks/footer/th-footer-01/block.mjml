@@ -1,0 +1,32 @@
+{{!-- TH_FOOTER_01 · (optional Preishinweis) · beige Impressumsfläche: Siegel 20 % | Shopname + Betreiber 40 % | Register/Kontakt/© 40 % · weiße Fläche mit Abo-Hinweis und Abmeldelink HIER.
+     Pflichtinhalte (Abmeldelink, Betreiber) werden validiert. --}}
+{{#if d.show_price_note}}
+<mj-section padding="0 {{t.layout.section_padding_x}}px" css-class="th-price-note">
+  <mj-column padding="{{t.layout.column_padding}}px">
+    <mj-text align="center" font-size="{{t.type.price_note.size}}" line-height="{{t.type.price_note.line_height}}" color="{{t.color.text_muted}}">{{d.legal.price_note}}</mj-text>
+  </mj-column>
+</mj-section>
+{{/if}}
+<mj-section background-color="{{t.color.footer_background}}" padding="{{t.layout.footer_padding_y}}px {{t.layout.section_padding_x}}px" css-class="th-footer">
+  <mj-column width="20%" padding="{{t.layout.column_padding}}px" vertical-align="middle">
+    <mj-image src="{{asset d.footer_logo.url}}" alt="{{d.footer_logo.alt}}" width="{{d.footer_logo.width}}px" align="left" padding="10px" href="{{link d.shop_url}}" />
+  </mj-column>
+  <mj-column width="40%" padding="{{t.layout.column_padding}}px" vertical-align="middle">
+    <mj-text color="{{t.color.footer_text}}" font-size="{{t.type.footer.size}}" line-height="{{t.type.footer.line_height}}">
+      <p style="margin:0 0 14px;font-size:{{t.type.footer_title.size}};line-height:{{t.type.footer_title.line_height}};font-weight:{{t.type.footer_title.weight}};">{{d.legal.title}}</p>
+      <p style="margin:0;">{{#each d.legal.operator_lines}}{{this}}{{#unless @last}}<br />{{/unless}}{{/each}}</p>
+    </mj-text>
+  </mj-column>
+  <mj-column width="40%" padding="{{t.layout.column_padding}}px" vertical-align="middle">
+    <mj-text color="{{t.color.footer_text}}" font-size="{{t.type.footer.size}}" line-height="{{t.type.footer.line_height}}">
+      <p style="margin:0;">{{#if d.legal.register}}{{d.legal.register}}<br />{{/if}}{{#if d.legal.managing_directors}}{{d.legal.managing_directors}}<br />{{/if}}Tel.: {{d.contact.phone}}<br /><a href="mailto:{{d.contact.email}}" style="color:{{t.color.footer_text}};text-decoration:none;">{{d.contact.email}}</a><br /><a href="{{link d.shop_url}}" style="color:{{t.color.footer_text}};text-decoration:none;">{{d.website_display}}</a><br />{{d.legal.rights}} {{year}}</p>
+    </mj-text>
+  </mj-column>
+</mj-section>
+<mj-section padding="10px {{t.layout.section_padding_x}}px 20px" css-class="th-unsubscribe">
+  <mj-column padding="20px">
+    <mj-text color="{{t.color.unsubscribe_text}}" font-size="{{t.type.unsubscribe.size}}" line-height="{{t.type.unsubscribe.line_height}}">
+      {{d.legal.subscription_reason}} {{unsubscribe d.legal.unsubscribe_sentence d.legal.unsubscribe_link_label d.unsubscribe_url}}
+    </mj-text>
+  </mj-column>
+</mj-section>
