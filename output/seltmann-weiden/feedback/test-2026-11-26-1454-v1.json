@@ -1,0 +1,13 @@
+{
+  "ts": "2026-11-26T13:55:46.473Z",
+  "mandant": "seltmann-weiden",
+  "campaign_id": "test-2026-11-26-1454",
+  "version": 1,
+  "decision": "Freigeben",
+  "comment": "",
+  "preview_url": "https://n8n.constancy.biz/webhook/newsletter-vorschau?mandant=seltmann-weiden&id=test-2026-11-26-1454-v1",
+  "html_file": "https://github.com/jeskoconstancy/newsletter-automation/blob/main/output/seltmann-weiden/test-2026-11-26-1454-v1.html",
+  "subject": "Festlicher Glanz für Ihren Tisch",
+  "errors": 0,
+  "warnings": 2
+}
