@@ -1,0 +1,13 @@
+{
+  "ts": "2026-11-27T08:26:08.994Z",
+  "mandant": "seltmann-weiden",
+  "campaign_id": "black-week-2026-11-27-0905",
+  "version": 2,
+  "decision": "Überarbeiten",
+  "comment": "EDITORIAL_CARD_01 bitte anderes Bild, bitte mache alle texte viel emotionaler und lass das mit der Gewährleistung weg",
+  "preview_url": "https://n8n.constancy.biz/webhook/newsletter-vorschau?mandant=seltmann-weiden&id=black-week-2026-11-27-0905-v2",
+  "html_file": "https://github.com/jeskoconstancy/newsletter-automation/blob/main/output/seltmann-weiden/black-week-2026-11-27-0905-v2.html",
+  "subject": "Black Week: Angebote für Ihren Tisch",
+  "errors": 0,
+  "warnings": 10
+}
