@@ -1,0 +1,13 @@
+{
+  "ts": "2026-11-27T08:30:34.054Z",
+  "mandant": "seltmann-weiden",
+  "campaign_id": "black-week-2026-11-27-0905",
+  "version": 4,
+  "decision": "Überarbeiten",
+  "comment": "EDITORIAL_CARD_01 bitte hier beim text mehr auf die Produkte eingehen",
+  "preview_url": "https://n8n.constancy.biz/webhook/newsletter-vorschau?mandant=seltmann-weiden&id=black-week-2026-11-27-0905-v4",
+  "html_file": "https://github.com/jeskoconstancy/newsletter-automation/blob/main/output/seltmann-weiden/black-week-2026-11-27-0905-v4.html",
+  "subject": "Black Week: Vier Serien jetzt im Angebot",
+  "errors": 0,
+  "warnings": 10
+}
