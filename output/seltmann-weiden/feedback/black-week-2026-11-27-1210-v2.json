@@ -1,0 +1,13 @@
+{
+  "ts": "2026-11-27T11:12:32.582Z",
+  "mandant": "seltmann-weiden",
+  "campaign_id": "black-week-2026-11-27-1210",
+  "version": 2,
+  "decision": "Überarbeiten",
+  "comment": ".",
+  "preview_url": "https://n8n.constancy.biz/webhook/newsletter-vorschau?mandant=seltmann-weiden&id=black-week-2026-11-27-1210-v2",
+  "html_file": "https://github.com/jeskoconstancy/newsletter-automation/blob/main/output/seltmann-weiden/black-week-2026-11-27-1210-v2.html",
+  "subject": "Black Week Angebote: 4 Kollektionen entdecken",
+  "errors": 4,
+  "warnings": 5
+}
