@@ -44,7 +44,7 @@
     },
     "esp": {
       "name": "rapidmail",
-      "unsubscribe_url": "{%link_unsubscribe}"
+      "unsubscribe_url": "https://seltmann-shop.de/newsletterabmeldung"
     }
   },
   "tokens": {
